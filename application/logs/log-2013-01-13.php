@@ -1,0 +1,123 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
+
+ERROR - 2013-01-13 12:09:56 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:09:56 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:09:56 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:09:56 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 64
+ERROR - 2013-01-13 12:11:39 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:11:39 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:11:39 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:11:39 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:12:03 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:12:03 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:12:03 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:12:03 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 66
+ERROR - 2013-01-13 12:13:18 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:13:18 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:13:18 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:13:18 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:13:36 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:13:36 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:13:36 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:13:36 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:14:38 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:14:38 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:14:38 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:14:38 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:15:24 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:15:24 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:15:24 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:15:24 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:20:12 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:20:12 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:20:12 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:20:12 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:20:50 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:20:50 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:20:50 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:20:50 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:20:51 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:20:51 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:20:51 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:20:51 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:21:25 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:21:25 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:21:25 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:21:25 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:21:59 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:21:59 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:21:59 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:21:59 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:23:00 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:23:00 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:23:00 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:23:00 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:23:00 --> Severity: Warning  --> stat() [<a href='function.stat'>function.stat</a>]: stat failed for /Applications/XAMPP/htdocs/logs/threek.log20130113 /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 104
+ERROR - 2013-01-13 12:23:01 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:23:01 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:23:01 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:23:01 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:25:19 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:25:19 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:25:19 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:25:19 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:33:09 --> Severity: Warning  --> require_once(/Applications/XAMPP/xamppfiles/htdocs/ThreeK/initial.inc.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory /Applications/XAMPP/xamppfiles/htdocs/ThreeK/application/core/MY_Controller.php 6
+ERROR - 2013-01-13 12:33:36 --> Severity: Warning  --> require_once(/Applications/XAMPP/xamppfiles/htdocs/ThreeK/initial.inc.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory /Applications/XAMPP/xamppfiles/htdocs/ThreeK/application/core/MY_Controller.php 6
+ERROR - 2013-01-13 12:33:37 --> Severity: Warning  --> require_once(/Applications/XAMPP/xamppfiles/htdocs/ThreeK/initial.inc.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory /Applications/XAMPP/xamppfiles/htdocs/ThreeK/application/core/MY_Controller.php 6
+ERROR - 2013-01-13 12:41:01 --> Severity: Warning  --> require_once(/Applications/XAMPP/xamppfiles/htdocs/ThreeK/initial.inc.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory /Applications/XAMPP/xamppfiles/htdocs/ThreeK/application/core/MY_Controller.php 6
+ERROR - 2013-01-13 12:41:02 --> Severity: Warning  --> require_once(/Applications/XAMPP/xamppfiles/htdocs/ThreeK/initial.inc.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory /Applications/XAMPP/xamppfiles/htdocs/ThreeK/application/core/MY_Controller.php 6
+ERROR - 2013-01-13 12:41:02 --> Severity: Warning  --> require_once(/Applications/XAMPP/xamppfiles/htdocs/ThreeK/initial.inc.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory /Applications/XAMPP/xamppfiles/htdocs/ThreeK/application/core/MY_Controller.php 6
+ERROR - 2013-01-13 12:41:18 --> Severity: Warning  --> require_once(/Applications/XAMPP/xamppfiles/htdocs/ThreeK/initial.inc.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory /Applications/XAMPP/xamppfiles/htdocs/ThreeK/application/core/MY_Controller.php 6
+ERROR - 2013-01-13 12:41:19 --> Severity: Warning  --> require_once(/Applications/XAMPP/xamppfiles/htdocs/ThreeK/initial.inc.php) [<a href='function.require-once'>function.require-once</a>]: failed to open stream: No such file or directory /Applications/XAMPP/xamppfiles/htdocs/ThreeK/application/core/MY_Controller.php 6
+ERROR - 2013-01-13 12:41:30 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:41:30 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:41:30 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:41:30 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:42:30 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:42:30 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:42:30 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:42:30 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:43:37 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:43:37 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:43:37 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:43:37 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:43:38 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:43:38 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:43:38 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:43:38 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:43:38 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:43:38 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:43:38 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:43:38 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:44:01 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:44:01 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:44:01 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:44:01 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:44:02 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:44:02 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:44:02 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:44:02 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:44:20 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:44:20 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:44:20 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:44:20 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:44:27 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:44:27 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:44:27 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:44:27 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:44:29 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:44:29 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:44:29 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:44:29 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:44:29 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:44:29 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:44:29 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:44:29 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:44:30 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:44:30 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:44:30 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:44:30 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
+ERROR - 2013-01-13 12:44:30 --> Severity: Notice  --> Undefined index: HTTP_X_FORWARDED_FOR /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 24
+ERROR - 2013-01-13 12:44:30 --> Severity: Notice  --> Undefined index: HTTP_CLIENT_IP /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 26
+ERROR - 2013-01-13 12:44:30 --> Severity: Notice  --> Undefined index: HOSTNAME /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CCommon.class.php 47
+ERROR - 2013-01-13 12:44:30 --> Severity: Notice  --> Undefined index: obj /Applications/XAMPP/xamppfiles/htdocs/ThreeK/logger/CLog.class.php 65
