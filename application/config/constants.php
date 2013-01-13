@@ -36,6 +36,14 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
+define('LOGGER_PATH',"/Applications/XAMPP/htdocs/ThreeK/logger");
+
+$LOG = array(
+    'intLevel'=>'32',
+    'strLogFile'=>'/Applications/XAMPP/htdocs/logs/threek.log',
+    'strWfLogFile'=>'/Applications/XAMPP/htdocs/logs/threekwf.log'
+);
+
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
