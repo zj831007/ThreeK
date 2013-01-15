@@ -11,9 +11,12 @@ abstract class MY_Controller extends CI_Controller {
     function __construct() {
 
         parent::__construct();
+        $this->load->helper("commonfun");
 
-        $this->load->helper(array('form', 'url', 'date', 'string', 'file', 'directory', 'language'));
-        $this->load->library('upload');
+       // CLog::debug($_SERVER['']);
+
+        //$this->load->helper(array('form', 'url', 'date', 'string', 'file', 'directory', 'language'));
+        //$this->load->library('upload');
 
 
     }

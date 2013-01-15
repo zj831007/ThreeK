@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 01 月 14 日 14:09
+-- 生成日期: 2013 年 01 月 15 日 02:05
 -- 服务器版本: 5.1.44
 -- PHP 版本: 5.3.1
 
@@ -528,7 +528,8 @@ CREATE TABLE IF NOT EXISTS `user09` (
 CREATE TABLE IF NOT EXISTS `uuid` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
