@@ -20,7 +20,7 @@ class Welcome extends MY_Controller {
 	public function index()
 	{
 
-        CLog::debug("dd");
+        //CLog::debug("dd");
 
 		$this->load->view('welcome_message');
 	}
