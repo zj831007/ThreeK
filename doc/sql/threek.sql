@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 01 月 15 日 02:05
+-- 生成日期: 2013 年 01 月 16 日 13:24
 -- 服务器版本: 5.1.44
 -- PHP 版本: 5.3.1
 
@@ -26,7 +26,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 CREATE TABLE IF NOT EXISTS `goods00` (
-  `goodsid` int(11) NOT NULL,
+  `goodsid` varchar(50) NOT NULL,
   `title` varchar(50) NOT NULL,
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `goods00` (
 --
 
 CREATE TABLE IF NOT EXISTS `goods01` (
-  `goodsid` int(11) NOT NULL,
+  `goodsid` varchar(50) NOT NULL,
   `title` varchar(50) NOT NULL,
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `goods01` (
 --
 
 CREATE TABLE IF NOT EXISTS `goods02` (
-  `goodsid` int(11) NOT NULL,
+  `goodsid` varchar(50) NOT NULL,
   `title` varchar(50) NOT NULL,
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `goods02` (
 --
 
 CREATE TABLE IF NOT EXISTS `goods03` (
-  `goodsid` int(11) NOT NULL,
+  `goodsid` varchar(50) NOT NULL,
   `title` varchar(50) NOT NULL,
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `goods03` (
 --
 
 CREATE TABLE IF NOT EXISTS `goods04` (
-  `goodsid` int(11) NOT NULL,
+  `goodsid` varchar(50) NOT NULL,
   `title` varchar(50) NOT NULL,
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `goods04` (
 --
 
 CREATE TABLE IF NOT EXISTS `goods05` (
-  `goodsid` int(11) NOT NULL,
+  `goodsid` varchar(50) NOT NULL,
   `title` varchar(50) NOT NULL,
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `goods05` (
 --
 
 CREATE TABLE IF NOT EXISTS `goods06` (
-  `goodsid` int(11) NOT NULL,
+  `goodsid` varchar(50) NOT NULL,
   `title` varchar(50) NOT NULL,
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
@@ -194,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `goods06` (
 --
 
 CREATE TABLE IF NOT EXISTS `goods07` (
-  `goodsid` int(11) NOT NULL,
+  `goodsid` varchar(50) NOT NULL,
   `title` varchar(50) NOT NULL,
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
@@ -218,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `goods07` (
 --
 
 CREATE TABLE IF NOT EXISTS `goods08` (
-  `goodsid` int(11) NOT NULL,
+  `goodsid` varchar(50) NOT NULL,
   `title` varchar(50) NOT NULL,
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
@@ -242,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `goods08` (
 --
 
 CREATE TABLE IF NOT EXISTS `goods09` (
-  `goodsid` int(11) NOT NULL,
+  `goodsid` varchar(50) NOT NULL,
   `title` varchar(50) NOT NULL,
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
@@ -528,12 +528,15 @@ CREATE TABLE IF NOT EXISTS `user09` (
 CREATE TABLE IF NOT EXISTS `uuid` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(30) NOT NULL,
-  `passwd` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- 转存表中的数据 `uuid`
 --
 
+INSERT INTO `uuid` (`id`, `username`) VALUES
+(1, '1'),
+(10, '2'),
+(11, '3');
