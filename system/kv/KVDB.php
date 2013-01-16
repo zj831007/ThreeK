@@ -26,7 +26,7 @@ function & MONGDB(){
     }
 
     if((class_exists(Mongo))){
-        
+
         try{
             $mongdodbH = $mongodb['hostname'];
             $mongdodbP = $mongodb['port'];
@@ -64,12 +64,18 @@ function &REDIS(){
     }
 
     if(class_exists(Redis)){
-        $redisH = $redis['hostname'];
-        $redisP = $redis['port'];
-        $redis = new Redis();
-        $redis->connect("$redisH", $redisP);
+        try{
+            $redisH = $redis['hostname'];
+            $redisP = $redis['port'];
+            $redis = new Redis();
+            $redis->connect("$redisH", $redisP);
 
-        return $redis;
+            return $redis;
+        }catch (Exception $e){
+            //TODO  redis链接出错 ，报警处理
+            return null;
+        }
+
     }else{
         return null;
     }
