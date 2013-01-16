@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 01 月 16 日 13:24
+-- 生成日期: 2013 年 01 月 16 日 13:32
 -- 服务器版本: 5.1.44
 -- PHP 版本: 5.3.1
 
@@ -267,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `goods09` (
 
 CREATE TABLE IF NOT EXISTS `goods_pic` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `goodsid` int(11) NOT NULL,
+  `goodsid` varchar(50) NOT NULL,
   `smallpic` varchar(50) NOT NULL,
   `bigpic` varchar(50) NOT NULL,
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
