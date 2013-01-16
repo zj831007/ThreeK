@@ -26,12 +26,20 @@ function & MONGDB(){
     }
 
     if((class_exists(Mongo))){
-        $mongdodbH = $mongodb['hostname'];
-        $mongdodbP = $mongodb['port'];
-        $mongodbObj = new Mongo("mongodb://$mongdodbH:$mongdodbP");
-        $mongodbObj->selectDB("threek");
+        
+        try{
+            $mongdodbH = $mongodb['hostname'];
+            $mongdodbP = $mongodb['port'];
+            $mongodbObj = new Mongo("mongodb://$mongdodbH:$mongdodbP");
 
-        return $mongodbObj;
+            $mongodbObj->selectDB("threek");
+
+            return $mongodbObj;
+        }catch (Exception $e){
+            //TODO  mongodb链接出错 ，报警处理
+            return null;
+        }
+
     }else{
         return null;
     }
