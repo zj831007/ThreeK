@@ -346,6 +346,66 @@ class CI_Loader {
 		$CI->db =& DB($params, $active_record);
 	}
 
+
+    // --------------------------------------------------------------------
+
+    /**
+     * @param bool $return
+     */
+    public function mongodb($return = FALSE){
+
+
+        // Grab the super object
+        $CI =& get_instance();
+
+        if ($return == FALSE  AND isset($CI->mongodb) AND is_object($CI->mongodb))
+        {
+            return FALSE;
+        }
+
+        require_once(BASEPATH.'kv/KVDB.php');
+
+        if ($return === TRUE)
+        {
+            return MONGDB();
+        }
+
+        // Initialize the db variable.  Needed to prevent
+        // reference errors with some configurations
+        $CI->mongodb = '';
+        // Load the DB class
+        $CI->mongodb =& MONGDB();
+
+    }
+
+    // --------------------------------------------------------------------
+    public function redis($return = FALSE){
+        // Grab the super object
+        $CI =& get_instance();
+
+        if ($return == FALSE  AND isset($CI->redis) AND is_object($CI->redis))
+        {
+            return FALSE;
+        }
+
+        require_once(BASEPATH.'kv/KVDB.php');
+
+        if ($return === TRUE)
+        {
+            return REDIS();
+        }
+
+        // Initialize the db variable.  Needed to prevent
+        // reference errors with some configurations
+        $CI->redis = '';
+
+        // Load the DB class
+        $CI->redis =& REDIS();
+
+    }
+
+
+
 	// --------------------------------------------------------------------
 
 	/**
@@ -1172,7 +1232,24 @@ class CI_Loader {
 				$autoload['libraries'] = array_diff($autoload['libraries'], array('database'));
 			}
 
-			// Load all other libraries
+            // load mongodb driver
+            if (in_array('mongodb', $autoload['libraries']))
+            {
+                $this->mongodb();
+                $autoload['libraries'] = array_diff($autoload['libraries'], array('mongodb'));
+            }
+
+
+            //load redis driver
+            if (in_array('redis', $autoload['libraries']))
+            {
+                $this->redis();
+                $autoload['libraries'] = array_diff($autoload['libraries'], array('redis'));
+            }
+
+
+
+            // Load all other libraries
 			foreach ($autoload['libraries'] as $item)
 			{
 				$this->library($item);

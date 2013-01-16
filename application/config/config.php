@@ -361,19 +361,7 @@ $config['proxy_ips'] = '';
 
 
 
-//mongodb config
-$config['mongodb'] = array(
-    'hostname'=>'127.0.0.1',
-    'port'=>'27017'
-);
 
-
-
-//redis config
-$config['redis'] = array(
-    'hostname'=>'127.0.0.1',
-    'port'=>'6379'
-);
 
 
 

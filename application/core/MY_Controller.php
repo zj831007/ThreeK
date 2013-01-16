@@ -7,33 +7,12 @@ if (!defined('BASEPATH'))
 
 abstract class MY_Controller extends CI_Controller {
 
-    protected  $mongodb;
-    protected  $redis;
-
 
     function __construct() {
 
         parent::__construct();
         $this->load->helper("commonfun");
 
-
-        //mongodb
-        $mongdodbConf = $this->config->item('mongodb');
-        $mongdodbH = $mongdodbConf['hostname'];
-        $mongdodbP = $mongdodbConf['port'];
-
-
-        $this->mongodb = new Mongo("mongodb://$mongdodbH:$mongdodbP");
-        $this->mongodb->selectDB("threek");
-
-
-        $redisConf = $this->config->item('redis');
-        $redisH = $redisConf['hostname'];
-        $redisP = $redisConf['port'];
-
-        //redis
-//        $this->redis = new Redis();
-//        $this->redis->connect("$redisH", $redisP);
 
         // CLog::debug($_SERVER['']);
 

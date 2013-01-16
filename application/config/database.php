@@ -65,5 +65,19 @@ $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
 
+
+//================================
+//mongodb config
+$mongodb['hostname'] = '127.0.0.1';
+$mongodb['port'] = '27017';
+
+
+//================================
+//redis config
+$redis['hostname'] = '127.0.0.1';
+$redis['port'] = '6379';
+
+
+
 /* End of file database.php */
 /* Location: ./application/config/database.php */
