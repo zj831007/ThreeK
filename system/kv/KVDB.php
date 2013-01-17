@@ -37,7 +37,7 @@ function & MONGDB(){
             return $mongodbObj;
         }catch (Exception $e){
             //TODO  mongodb链接出错 ，报警处理
-            return null;
+
         }
 
 
@@ -71,7 +71,7 @@ function &REDIS(){
             return $redis;
         }catch (Exception $e){
             //TODO  redis链接出错 ，报警处理
-            return null;
+
         }
 
 
