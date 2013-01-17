@@ -25,7 +25,7 @@ function & MONGDB(){
         show_error('No mongodb connection settings were found in the database config file.');
     }
 
-    if((class_exists(Mongo))){
+
 
         try{
             $mongdodbH = $mongodb['hostname'];
@@ -40,9 +40,7 @@ function & MONGDB(){
             return null;
         }
 
-    }else{
-        return null;
-    }
+
 
 }
 
@@ -63,7 +61,7 @@ function &REDIS(){
         show_error('No redus connection settings were found in the database config file.');
     }
 
-    if(class_exists(Redis)){
+
         try{
             $redisH = $redis['hostname'];
             $redisP = $redis['port'];
@@ -76,9 +74,7 @@ function &REDIS(){
             return null;
         }
 
-    }else{
-        return null;
-    }
+
 
 
 }
