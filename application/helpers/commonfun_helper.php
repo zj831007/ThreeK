@@ -10,7 +10,7 @@
 
 
 
-if(!function_exists(tkProcessError)){
+if(!function_exists('tkProcessError')){
 
     function tkProcessError($code){
         $CI = &get_instance();
