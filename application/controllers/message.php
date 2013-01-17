@@ -14,7 +14,7 @@ class Message extends MY_Controller{
     function __construct(){
 
         parent::__construct();
-        $this->load->model('User_model');
+        $this->load->model('Message_model');
     }
 
 
@@ -30,7 +30,7 @@ class Message extends MY_Controller{
         $time=date('Y-m-d H:i:s',time());
 
 
-
+        $this->Message_model->insert($from_uid, $to_uid, $content);
 
 
     }
@@ -76,5 +76,10 @@ class Message extends MY_Controller{
 
     }
 
+    /**
+     * 获取未读私信数量
+     */
+    public  function unread(){
 
+    }
 }

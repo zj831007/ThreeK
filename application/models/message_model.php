@@ -9,137 +9,113 @@
  * Time: 下午10:15
  * To change this template use File | Settings | File Templates.
  */
-class User_model extends CI_Model{
+class Message_model extends CI_Model{
 
+    const MSG_COLLECTTION = 'message';
 
     function __construct(){
         parent::__construct();
+        $this->load->model('User_model');
     }
-	/**
-	 * @var unknown_type
-	 */
-    static $userTableCnt = 10;
+
     /**
-     * 
-     * @var unknown_type
-     */
-    const USER_REG_OK = 0;
-    const USER_EXISTS = 1;
-    const USER_REG_FAIL = 2;
-    
-    /**
-     * 注册新用户
-     * @param $username
-     * @param $password
+     * 发送私信
+     * 将用户消息录入数据库,每次都会插入2条记录
+     *   msgobj{
+     *       from 发起用户id，当前用户的uid
+     *       fromname 发起用户名称
+     *       fromeface 发起用户头像
+     *       to   目标用户id
+     *       toname 发起用户名称
+     *       toface 发起用户头像
+     *       content 消息内容
+     *       timestamp 当前时间戳
+     *   }
      *
+     * @param $fuid
+     * @param $tuid
+     * @param $content
+     * @return 返回这条消息的内容
      */
-    function insertNewUser($username, $password){
- 
-    	$ret = USER_REG_OK;
-        //防止sql注入
-        $uname = $this->db->escape($username);
-        $upass = $this->db->escape($password);
+    function insert($fuid, $tuid, $content){
 
-        //判断username是否已注册
-        $sql = "SELECT `id` FROM `uuid` where username = '".$uname."' limit 1";
-        $query = $this->db->query($sql);
+        $msgCollection = $this->mongodb->selectCollection(self::MSG_COLLECTTION);
 
-        if ($query->num_rows() > 0){
-            //此用户已存在，错误处理 TODO
-            $ret = USER_EXISTS;
-        }else{
-        	//开启
-        	$this->db->trans_start();
-            $sql = "INSERT INTO `uuid`(`username`,`passwd`) VALUES('".$uname."',$upass)";
-            $this->db->query($sql);
-            if($this->db->affected_rows()){
-                $id  = $this->db->insert_id();
-                $table = $this->_getTable($id);
-                //向user表中插入数据：根据$id分表插入 TODO 
-                $sql = "INSERT INTO `$table`(`userid`,`username`) VALUES($id,'".$uname."')";
-                if($this->db->query($sql)){
-                	
-                }else{
-                	$ret = USER_REG_FAIL;
-                }
-            }else{
-                //插入失败，错误处理 TODO
-            	$ret = USER_REG_FAIL;
-            }
-            $this->db->trans_complete();
-            if ($this->db->trans_status() === FALSE){
-            	// 生成一条错误信息... 或者使用 log_message() 函数来记录你的错误信息
-            	$ret = USER_REG_FAIL;
-            }
-        }
-        $r = array();
-        $r['ret'] = $ret;
-        if( USER_REG_OK == $ret){
-        	$r['uuid'] = $id;
-        }
-        return $r;
+        $msgobj = array(
+            
+        );
+
+
+
+
+//        $doc = array(
+//            "name" => "MongoDB",
+//            "type" => "database",
+//            "count" => 1,
+//            "info" => (object)array( "x" => 203, "y" => 102),
+//            "versions" => array("0.9.7", "0.9.8", "0.9.9")
+//        );
+//        $msgCollection->insert($doc);
+
+        //$document = $msgCollection->findOne();
+        //var_dump($document);
+
+//        echo $msgCollection->count();
+
+        //$a = array('a'=>'b');
+        //$db->insert($a,array('safe'=>true));
+        //echo $db;
+        //$fuserInfo = $this->User_model->getUserInfo($fuid);
+        //var_dump($fuserInfo);
+
     }
-	
+
+
     /**
-     * 用户登录
-     * @param $username
-     * @param $password
-     * 
-     * @return 用户基本信息
+     * 返回单条私信内容
+     * @param $msgid
      */
-     function checkUserPasswd($username,$password){
-     	$username = $this->db->escape($username);
-     	$password = $this->db->escape($password);
-     	
-     	$sql = "SELECT * FROM `uuid` WHERE `username` = '".$username."' AND `passwd` = $password";
-     	$query = $this->db->query($sql);
-     	if( $query ){
-     		$r = $query->result_array();
-     		return $r;
-     	}else{
-     		return null;
-     	}
-     }
-     /**
-      * 根据用户名获取$uuid
-      * @param $username
-      * 
-      * @return $uuid
-      */
-     private function _getUuid($username){
-     	$sql = "SELECT `id` FROM `uuid` WHERE `username` = '".$username."'";
-     	if( $this->db->query($sql) ){
-     		$r = $this->db->row();
-     		return $r->id;
-     	}else{
-     		return 0;
-     	}
-     }
-     /**
-      * 根据UID获取用户基本信息
-      * @param $uuid
-      * 
-      * @return 用户基本信息
-      */
-     function getUserInfo($uuid){
-     	$uuid = $this->db->escape($uuid);
-     	$tableIndex = $uuid % 10;
-     	$sql = "SELECT * FROM user".sprintf("%02d",$tableIndex)." WHERE userid = $uuid";
-     	if( $this->db->query($sql) ){
-     		return $this->db->row();
-     	}else{
-     		return null;
-     	}
-     }
-     
-     /**
-      * 根据UUID获取用户分表名
-      * @param $uuid
-      * 
-      * @return 表明
-      */
-     private function _getTable($uuid){
-     	$tableIndex = $uuid % User_model::userTableCnt;
-     	return "user".sprintf("%02d",$tableIndex);
-     }
+    function findone($msgid){
+
+
+    }
+
+    /**
+     * 删除个人私信
+     * @param $uid
+     * @param $otherid
+     */
+    function del($uid, $otherid){
+
+
+    }
+
+
+    /**
+     * 返回该用户的信息列表首页
+     * @param $uid
+     */
+    function detailList($uid){
+
+
+    }
+
+    /**
+     * 某一个用户和目标用户的聊天记录详细页面
+     * @param $uid
+     * @param $otherid
+     */
+    function show($uid, $otherid){
+
+
+    }
+
+    /**
+     * 返回未读消息数
+     * @param $uid
+     * @param $st
+     */
+    function unreadCount($uid, $st){
+
+    }
 }

@@ -43,7 +43,7 @@ class User extends MY_Controller{
 	public function login(){
 		$username = $this->input->get_post("account");
 		$password = $this->input->get_post("password");
-		
+
 		$userInfo = $this->User_model->checkUserPasswd($username,$password);
 		if($userInfo){
 			echo json_encode($userInfo);
