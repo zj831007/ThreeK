@@ -30,9 +30,9 @@ function & MONGDB(){
         try{
             $mongdodbH = $mongodb['hostname'];
             $mongdodbP = $mongodb['port'];
-            $mongodbObj = new Mongo("mongodb://$mongdodbH:$mongdodbP");
+            $connection = new MongoClient("mongodb://$mongdodbH:$mongdodbP");
 
-            $mongodbObj->selectDB("threek");
+            $mongodbObj = $connection->threek;
 
             return $mongodbObj;
         }catch (Exception $e){
@@ -71,7 +71,6 @@ function &REDIS(){
             return $redis;
         }catch (Exception $e){
             //TODO  redis链接出错 ，报警处理
-
         }
 
 
