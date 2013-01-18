@@ -18,7 +18,7 @@ class User_model extends CI_Model{
 	/**
 	 * @var unknown_type
 	 */
-    static $userTableCnt = 10;
+    const userTableCnt = 10;
     /**
      * 
      * @var unknown_type
@@ -34,48 +34,48 @@ class User_model extends CI_Model{
      *
      */
     function insertNewUser($username, $password){
- 
-    	$ret = USER_REG_OK;
+ 		//默认注册OK
+    	$ret = self::USER_REG_OK;
         //防止sql注入
+    	$password = trim($password);
+    	$password = md5($password);
         $uname = $this->db->escape($username);
         $upass = $this->db->escape($password);
-
         //判断username是否已注册
-        $sql = "SELECT `id` FROM `uuid` where username = '".$uname."' limit 1";
+        $sql = "SELECT `id` FROM `uuid` where username = $uname limit 1";
         $query = $this->db->query($sql);
-
         if ($query->num_rows() > 0){
             //此用户已存在，错误处理 TODO
-            $ret = USER_EXISTS;
+            $ret = self::USER_EXISTS;
         }else{
         	//开启
-        	$this->db->trans_start();
-            $sql = "INSERT INTO `uuid`(`username`,`passwd`) VALUES('".$uname."',$upass)";
+        	$this->db->trans_begin();
+            $sql = "INSERT INTO `uuid`(`username`,`passwd`) VALUES($uname,$upass)";
             $this->db->query($sql);
-            if($this->db->affected_rows()){
+            if( $this->db->affected_rows() ){
                 $id  = $this->db->insert_id();
                 $table = $this->_getTable($id);
                 //向user表中插入数据：根据$id分表插入 TODO 
-                $sql = "INSERT INTO `$table`(`userid`,`username`) VALUES($id,'".$uname."')";
-                if($this->db->query($sql)){
-                	
+                $sql = "INSERT INTO `$table`(`userid`,`username`) VALUES($id,$uname)";
+                if( $this->db->affected_rows() ){
                 }else{
-                	$ret = USER_REG_FAIL;
+                	$ret = self::USER_REG_FAIL;
                 }
             }else{
                 //插入失败，错误处理 TODO
-            	$ret = USER_REG_FAIL;
+            	$ret = self::USER_REG_FAIL;
             }
-            $this->db->trans_complete();
             if ($this->db->trans_status() === FALSE){
-            	// 生成一条错误信息... 或者使用 log_message() 函数来记录你的错误信息
-            	$ret = USER_REG_FAIL;
+            	$this->db->trans_rollback();
+            	$ret = self::USER_REG_FAIL;
+            }else{
+            	$this->db->trans_commit();
             }
         }
         $r = array();
         $r['ret'] = $ret;
-        if( USER_REG_OK == $ret){
-        	$r['uuid'] = $id;
+        if( self::USER_REG_OK == $ret){
+        	$r['uid'] = $id;
         }
         return $r;
     }
@@ -88,13 +88,17 @@ class User_model extends CI_Model{
      * @return 用户基本信息
      */
      function checkUserPasswd($username,$password){
+     	
+     	$password = trim($password);
+     	$password = md5($password);
+     	
      	$username = $this->db->escape($username);
      	$password = $this->db->escape($password);
      	
-     	$sql = "SELECT * FROM `uuid` WHERE `username` = '".$username."' AND `passwd` = $password";
+     	$sql = "SELECT * FROM `uuid` WHERE `username` = ".$username." AND `passwd` = $password";
      	$query = $this->db->query($sql);
-     	if( $query ){
-     		$r = $query->result_array();
+     	if( 1 == $query->num_rows() ){
+     		$r = current($query->result_array());
      		return $r;
      	}else{
      		return null;
@@ -139,7 +143,7 @@ class User_model extends CI_Model{
       * @return 表明
       */
      private function _getTable($uuid){
-     	$tableIndex = $uuid % User_model::userTableCnt;
+     	$tableIndex = $uuid % self::userTableCnt;
      	return "user".sprintf("%02d",$tableIndex);
      }
 }
