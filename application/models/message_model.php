@@ -16,6 +16,7 @@ class Message_model extends CI_Model{
     function __construct(){
         parent::__construct();
         $this->load->model('User_model');
+        $this->messageCol = $this->mongodb->selectCollection(self::MSG_COLLECTTION);
     }
 
     /**
@@ -39,34 +40,42 @@ class Message_model extends CI_Model{
      */
     function insert($fuid, $tuid, $content){
 
-        $msgCollection = $this->mongodb->selectCollection(self::MSG_COLLECTTION);
-
         $msgobj = array(
-            
+            "from"     => $fuid,
+            "fromname" => "",//TODO
+            "fromface" => "",
+            "to"       => $tuid,
+            "toname"   => "",
+            "toface"   => "",
+            "content"  => $content,
+            "timestamp"=> time()
         );
 
 
 
 
-//        $doc = array(
-//            "name" => "MongoDB",
-//            "type" => "database",
-//            "count" => 1,
-//            "info" => (object)array( "x" => 203, "y" => 102),
-//            "versions" => array("0.9.7", "0.9.8", "0.9.9")
-//        );
-//        $msgCollection->insert($doc);
+        //1,将发消息者作为belong存一条消息记录
+        $msgobj1 = array_merge($msgobj,array());
+        $msgobj1["belong"] = $fuid;
 
-        //$document = $msgCollection->findOne();
-        //var_dump($document);
+        //2,将获得消息者作为belong存一条消息记录
+        $msgobj2 = array_merge($msgobj,array());
+        $msgobj2['belong'] = $tuid;
 
-//        echo $msgCollection->count();
+        $this->messageCol->insert($msgobj1);
+        $this->messageCol->insert($msgobj2);
 
-        //$a = array('a'=>'b');
-        //$db->insert($a,array('safe'=>true));
-        //echo $db;
-        //$fuserInfo = $this->User_model->getUserInfo($fuid);
-        //var_dump($fuserInfo);
+        //更新或插入fuid, tuid的最新消息记录，供列表显示
+        $msgobj['belong'] = $fuid;
+        $msgobj['_id'] = $fuid.$tuid;
+        $msgobj['islist'] = 1;
+        //1次save
+        $this->messageCol->save($msgobj);
+
+        //2次save
+        $msgobj['belong'] = $tuid;
+        $msgobj["_id"] = $tuid.$fuid;
+        $this->messageCol->save($msgobj);
 
     }
 
@@ -76,8 +85,9 @@ class Message_model extends CI_Model{
      * @param $msgid
      */
     function findone($msgid){
+        $msgObj =  $this->messageCol->findOne(array("id" => $msgid));
 
-
+        return $msgObj;
     }
 
     /**
@@ -87,7 +97,10 @@ class Message_model extends CI_Model{
      */
     function del($uid, $otherid){
 
-
+        $this->messageCol->remove(
+            array("belong"=>$uid),
+            array('$or' => array("from"=>$otherid,"to"=>$otherid))
+        );
     }
 
 
@@ -97,7 +110,13 @@ class Message_model extends CI_Model{
      */
     function detailList($uid){
 
+        $list = $this->messageCol->find(
+          array("belong" => $uid, "islist" => 1)
+        ).sort(
+            array("timestamp"=>-1)
+        );
 
+        return $list;
     }
 
     /**
@@ -107,7 +126,17 @@ class Message_model extends CI_Model{
      */
     function show($uid, $otherid){
 
+        $detailList = $this->messageCol->find(
+            array(
+                "belong" => $uid,
+                "islist" => array('$ne' => 1),
+                '$or'    => array("from" => $otherid, "to" => $otherid)
+            )
+        ).sort(
+            array("_id" => -1)
+        );
 
+        return $detailList;
     }
 
     /**
@@ -116,6 +145,7 @@ class Message_model extends CI_Model{
      * @param $st
      */
     function unreadCount($uid, $st){
+
 
     }
 }
