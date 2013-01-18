@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 01 月 16 日 14:39
+-- 生成日期: 2013 年 01 月 18 日 10:08
 -- 服务器版本: 5.1.44
 -- PHP 版本: 5.3.1
 
@@ -295,7 +295,8 @@ CREATE TABLE IF NOT EXISTS `user00` (
   `email` varchar(50) NOT NULL,
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
-  `mark` varchar(100) NOT NULL
+  `mark` varchar(100) NOT NULL,
+  `nickname` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -319,13 +320,16 @@ CREATE TABLE IF NOT EXISTS `user01` (
   `email` varchar(50) NOT NULL,
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
-  `mark` varchar(100) NOT NULL
+  `mark` varchar(100) NOT NULL,
+  `nickname` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `user01`
 --
 
+INSERT INTO `user01` (`userid`, `username`, `gender`, `desc`, `icon`, `tel`, `email`, `createtime`, `status`, `mark`, `nickname`) VALUES
+(1, 'justin', 1, '2', '1.jpg', 'sdfd', '', '2013-01-17 22:10:06', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -343,13 +347,16 @@ CREATE TABLE IF NOT EXISTS `user02` (
   `email` varchar(50) NOT NULL,
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
-  `mark` varchar(100) NOT NULL
+  `mark` varchar(100) NOT NULL,
+  `nickname` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `user02`
 --
 
+INSERT INTO `user02` (`userid`, `username`, `gender`, `desc`, `icon`, `tel`, `email`, `createtime`, `status`, `mark`, `nickname`) VALUES
+(2, 'justin2', 2, 'desc 2', '2.jpg', '22', '22', '2013-01-17 22:11:22', 1, '', '');
 
 -- --------------------------------------------------------
 
@@ -367,7 +374,8 @@ CREATE TABLE IF NOT EXISTS `user03` (
   `email` varchar(50) NOT NULL,
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
-  `mark` varchar(100) NOT NULL
+  `mark` varchar(100) NOT NULL,
+  `nickname` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -391,7 +399,8 @@ CREATE TABLE IF NOT EXISTS `user04` (
   `email` varchar(50) NOT NULL,
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
-  `mark` varchar(100) NOT NULL
+  `mark` varchar(100) NOT NULL,
+  `nickname` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -415,7 +424,8 @@ CREATE TABLE IF NOT EXISTS `user05` (
   `email` varchar(50) NOT NULL,
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
-  `mark` varchar(100) NOT NULL
+  `mark` varchar(100) NOT NULL,
+  `nickname` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -439,7 +449,8 @@ CREATE TABLE IF NOT EXISTS `user06` (
   `email` varchar(50) NOT NULL,
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
-  `mark` varchar(100) NOT NULL
+  `mark` varchar(100) NOT NULL,
+  `nickname` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -463,7 +474,8 @@ CREATE TABLE IF NOT EXISTS `user07` (
   `email` varchar(50) NOT NULL,
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
-  `mark` varchar(100) NOT NULL
+  `mark` varchar(100) NOT NULL,
+  `nickname` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -487,7 +499,8 @@ CREATE TABLE IF NOT EXISTS `user08` (
   `email` varchar(50) NOT NULL,
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
-  `mark` varchar(100) NOT NULL
+  `mark` varchar(100) NOT NULL,
+  `nickname` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -511,7 +524,8 @@ CREATE TABLE IF NOT EXISTS `user09` (
   `email` varchar(50) NOT NULL,
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
-  `mark` varchar(100) NOT NULL
+  `mark` varchar(100) NOT NULL,
+  `nickname` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
