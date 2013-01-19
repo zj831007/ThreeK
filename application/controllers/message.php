@@ -27,7 +27,6 @@ class Message extends MY_Controller{
         $from_uid = $this->input->get_post("from_uid");
         $to_uid = $this->input->get_post("to_uid");
         $content = $this->input->get_post("content");
-        $time=date('Y-m-d H:i:s',time());
 
 
         $this->Message_model->insert($from_uid, $to_uid, $content);
@@ -45,8 +44,9 @@ class Message extends MY_Controller{
         $count = $this->input->get_post("count");
         $page = $this->input->get_post("page");
 
+        $list = $this->Message_model->getList($uid);
 
-
+        echo json_encode($list);
     }
 
     /**
@@ -60,6 +60,10 @@ class Message extends MY_Controller{
         $other_uid = $this->input->get_post("other_uid");
         $count = $this->input->get_post("count");
 
+        $detailList = $this->Message_model->show($uid, $other_uid);
+
+
+        echo json_encode($detailList);
 
     }
 
@@ -72,7 +76,7 @@ class Message extends MY_Controller{
         $uid = $this->input->get_post("uid");
         $other_uid = $this->input->get_post("other_uid");
 
-
+        $this->Message_model->del($uid, $other_uid);
 
     }
 

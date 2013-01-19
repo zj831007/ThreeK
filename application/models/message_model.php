@@ -66,16 +66,25 @@ class Message_model extends CI_Model{
         $this->messageCol->insert($msgobj2);
 
         //更新或插入fuid, tuid的最新消息记录，供列表显示
+        $msgobj['islist'] = 1;
+
+        //1次save
         $msgobj['belong'] = $fuid;
         $msgobj['_id'] = $fuid.$tuid;
-        $msgobj['islist'] = 1;
-        //1次save
         $this->messageCol->save($msgobj);
 
-        //2次save
+        //2次save  取出消息接收者最新消息条数，加1 更新状态
+        $lastStatus = $this->messageCol->findOne(array("_id" => $tuid.$fuid), array("news" => true));
+        if(empty($lastStatus)){
+            $news = 0;
+        }else{
+            $news = $lastStatus['news'];
+        }
         $msgobj['belong'] = $tuid;
         $msgobj["_id"] = $tuid.$fuid;
+        $msgobj["news"] = ++$news;
         $this->messageCol->save($msgobj);
+
 
     }
 
@@ -99,7 +108,7 @@ class Message_model extends CI_Model{
 
         $this->messageCol->remove(
             array("belong"=>$uid),
-            array('$or' => array("from"=>$otherid,"to"=>$otherid))
+            array('$or' => array(array("from"=>$otherid), array("to"=>$otherid)))
         );
     }
 
@@ -108,13 +117,19 @@ class Message_model extends CI_Model{
      * 返回该用户的信息列表首页
      * @param $uid
      */
-    function detailList($uid){
+    function getList($uid){
 
-        $list = $this->messageCol->find(
-          array("belong" => $uid, "islist" => 1)
-        ).sort(
-            array("timestamp"=>-1)
+        $list = array();
+        $listCursor = $this->messageCol->find(
+            array("belong" => $uid, "islist" => 1)
+        )->sort(
+            array("timestamp" => -1)
         );
+
+        foreach ( $listCursor as $id => $value ){
+            $list[] = $value;
+        }
+
 
         return $list;
     }
@@ -126,15 +141,23 @@ class Message_model extends CI_Model{
      */
     function show($uid, $otherid){
 
-        $detailList = $this->messageCol->find(
+        $detailList = array();
+
+        $detailListCursor = $this->messageCol->find(
             array(
                 "belong" => $uid,
                 "islist" => array('$ne' => 1),
-                '$or'    => array("from" => $otherid, "to" => $otherid)
+                '$or'    => array(array("from" => $uid), array("to" => $otherid))
             )
-        ).sort(
-            array("_id" => -1)
+        )->sort(
+            array("timestamp" => -1)
         );
+
+        foreach ( $detailListCursor as $id => $value ){
+            $value["_id"] = $id;
+            $detailList[] = $value;
+        }
+
 
         return $detailList;
     }
