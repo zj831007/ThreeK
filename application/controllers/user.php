@@ -12,18 +12,24 @@ class User extends MY_Controller{
 
 	
 	const USER_COLLECTTION = 'user';
-	
+	private $userCollection = null;
     function __construct(){
 
         parent::__construct();
         $this->load->model('User_model');
+        $this->userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
     }
 
+	/**
+	 * 生成Token 更改为登陆状态
+	 * @param unknown_type $uid
+	 * @return string
+	 */    	
     private function _genToken($uid){
     	$ret = array();
     	$userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
     	$ret['uid'] = $uid;
-    	$token = uniqid(mt_rand(10000,99999));
+    	$token = md5($uid.time().uniqid(mt_rand(10000,99999)));
     	$ret['access_token'] = $token;
     	$tmp = $userCollection->findOne(array("uid" => $ret['uid']));
     	if($tmp){
@@ -32,8 +38,27 @@ class User extends MY_Controller{
     	}else{
     		//第一次登录
     	}
+    	$ret['status'] = '1';
     	$userCollection->insert($ret);
     	return $token;
+    }
+    
+    /**
+     * 验证toekn与用户名是否有效
+     * @param string $uid
+     * @param string $token
+     * @return boolean
+     */
+    private function _checkUidToken($uid,$token){
+    	$userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
+    	$query = array('uid' => $uid,'access_token' => $token);
+    	$tmp = $userCollection->findOne($query);
+    	if($tmp){
+    		//验证通过
+    		return true;
+    	}else{
+    		return false;
+    	}
     }
 
     /**
@@ -90,20 +115,56 @@ class User extends MY_Controller{
 	 * 访问方法：http://localhost/threek/index.php/user/status?uid=3&access_token=123&op=1
 	 */
 	public function status(){
+		$ret = array();
+		$uid = $this->input->get_post("uid");
+		$token = $this->input->get_post("access_token");
+		$op = $this->input->get_post("op");
 		
+		if( $this->_checkUidToken($uid, $token)){
+			//验证通过
+			if( 1 == $op ){
+				$newdata = array('$set' => array("status" => "1"));
+				$ret['status'] = "1";
+			}else{
+				$newdata = array('$set' => array("status" => "2"));
+				$ret['status'] = "2";
+			}
+			$this->userCollection->update(array('uid'=>$uid,'access_token'=>$token),$newdata);
+		}
+		else{
+			$ret['status'] = "2";
+		}
+		echo json_encode($ret);
 	}
 	/**
-	 * 用户注销
-	 * 访问方法：http://localhost/threek/index.php/user/status?uid=3&access_token=123&op=1
+	 * 获取个人信息
+	 * 访问方法：http://localhost/threek/index.php/user/profile?uid=3
 	 */
 	public function profile(){
-		
+		$uid = $this->input->get_post("uid");
+		$profile = $this->User_model->getUserInfo($uid);
+		echo json_encode($profile);
 	}
 	/**
-	 * 用户注销
-	 * 访问方法：http://localhost/threek/index.php/user/status?uid=3&access_token=123&op=1
+	 * 修改用户信息
+	 * 访问方法：http://localhost/threek/index.php/user/editProfile?uid=3&access_token=123&gender=1&desc=desc123&icon=http://www.baidu.com&tel=1234567890&email=aa@aa.com&nickname=123
 	 */
 	public function editProfile(){
-	
+		$ret = array();
+		$uid = $this->input->get_post('uid');
+		$token = $this->input->get_post('access_token');
+		$gender = $this->input->get_post('gender');
+		$desc = $this->input->get_post('desc');
+		$icon = $this->input->get_post('icon');
+		$tel = $this->input->get_post('tel');
+		$email = $this->input->get_post('email');
+		$nickname = $this->input->get_post('nickname');
+		if( $this->_checkUidToken($uid, $token)){
+			//验证成功
+			$ret = $this->User_model->updateUserInfo($uid,$gender,$desc,$icon,$tel,$email,$nickname);
+		}else{
+			//
+		}
+		echo json_encode($ret);
 	}
 }

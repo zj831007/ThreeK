@@ -57,6 +57,7 @@ class User_model extends CI_Model{
                 $table = $this->_getTable($id);
                 //向user表中插入数据：根据$id分表插入 TODO 
                 $sql = "INSERT INTO `$table`(`userid`,`username`) VALUES($id,$uname)";
+                $this->db->query($sql);
                 if( $this->db->affected_rows() ){
                 }else{
                 	$ret = self::USER_REG_FAIL;
@@ -126,14 +127,75 @@ class User_model extends CI_Model{
       * @return 用户基本信息
       */
      function getUserInfo($uuid){
+     	$uuid = (int)$uuid;
      	$uuid = $this->db->escape($uuid);
-     	$tableIndex = $uuid % 10;
-     	$sql = "SELECT * FROM user".sprintf("%02d",$tableIndex)." WHERE userid = $uuid";
-     	if( $this->db->query($sql) ){
-     		return $this->db->row();
+     	$table = $this->_getTable($uuid);
+     	$sql = "SELECT * FROM $table WHERE userid = $uuid";
+     	$query = $this->db->query($sql);
+     	if( $query->num_rows() > 0 ){
+     		$r = current($query->result_array());
+     		return $r;
      	}else{
      		return null;
      	}
+     }
+     
+     /*
+      * 
+      */
+     function updateUserInfo($uid,$gender,$desc,$icon,$tel,$email,$nickname){
+     	$uid = (int)$uid;
+     	$uid = $this->db->escape($uid);
+     	$table = $this->_getTable($uid);
+     	$sql = "UPDATE $table ";
+     	$SET = "SET";
+     	$COMMA = "";
+     	if( false !== $gender){
+     		$gender = (int)$gender;
+     		$gender = $this->db->escape($gender);
+     		$sql .= "$COMMA$SET `gender` = $gender ";
+     		$SET = "";
+     		$COMMA = ",";
+     	}
+     	if( false !== $desc){
+     		$desc = $this->db->escape($desc);
+     		$sql .= "$COMMA$SET `desc` = $desc ";
+     		$SET = "";
+     		$COMMA = ",";
+     	}
+     	if( false !== $icon){
+     		$icon = $this->db->escape($icon);
+     		$sql .= "$COMMA$SET `icon` = $icon ";
+     		$SET = "";
+     		$COMMA = ",";
+     	}
+     	if( false !== $tel){
+     		$tel = $this->db->escape($tel);
+     		$sql .= "$COMMA$SET `tel` = $tel ";
+     		$SET = "";
+     		$COMMA = ",";
+     	}
+     	if( false !== $email){
+     		$email = $this->db->escape($email);
+     		$sql .= "$COMMA$SET `email` = $email ";
+     		$SET = "";
+     		$COMMA = ",";
+     	}
+     	if( false !== $nickname){
+     		$nickname = $this->db->escape($nickname);
+     		$sql .= "$COMMA$SET `nickname` = $nickname ";
+     		$SET = "";
+     		$COMMA = ",";
+     	}
+     	$sql .= " WHERE `userid` = $uid";
+     	$query = $this->db->query($sql);
+     	/*
+     	if( $this->db->affected_rows() ){
+     	}else{
+     		return null;
+     	}
+     	*/
+     	return $this->getUserInfo($uid);
      }
      
      /**
