@@ -141,13 +141,15 @@ class Message_model extends CI_Model{
      */
     function show($uid, $otherid){
 
+
+        //返回聊天记录
         $detailList = array();
 
         $detailListCursor = $this->messageCol->find(
             array(
                 "belong" => $uid,
                 "islist" => array('$ne' => 1),
-                '$or'    => array(array("from" => $uid), array("to" => $otherid))
+                '$or'    => array(array("from" => $otherid), array("to" => $uid))
             )
         )->sort(
             array("timestamp" => -1)
@@ -158,6 +160,11 @@ class Message_model extends CI_Model{
             $detailList[] = $value;
         }
 
+        //更新新消息计数
+        $this->messageCol->update(
+            array("_id" => $uid.$otherid),
+            array('$inc' => array("news" => -count($detailList)))
+        );
 
         return $detailList;
     }
