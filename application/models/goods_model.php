@@ -122,12 +122,15 @@ class Goods_model extends CI_Model{
      * @param $lon
      * @param $lat
      */
-    function getNearGoodsByLocal($lon,$lat,$pageSize,$pageNo,$status){
+    function getNearGoodsByLocal($lon,$lat,$pageSize,$pageNo,$status,$keyword){
         $query =  array(
             'gps'=>array("\$near"=> array('lon'=>$lon,'lat'=>$lat))
         );
         if($status != 2){
             $query['status'] = $status;
+        }
+        if($keyword != ""){
+            $query["desc"] = $keyword;
         }
        return  $this->goodsCol->find($query)->skip(($pageNo-1)*$pageSize)->limit($pageSize);
     }
