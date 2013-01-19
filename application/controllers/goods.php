@@ -96,7 +96,7 @@ class Goods extends MY_Controller{
         }elseif($filter=="1"){
             $lon = $this->input->get_post('lon');
             $lat = $this->input->get_post('lat');
-            $near = $this->Goods_model->getNearGoodsByLocal((int)$lon,(int)$lat,(int)$count,(int)$page,(int)$status);
+            $near = $this->Goods_model->getNearGoodsByLocal((int)$lon,(int)$lat,(int)$count,(int)$page,(int)$status,$keyword);
             while($near->hasNext()){
                 echo json_encode($near->getNext());
                 echo "<br/>";
