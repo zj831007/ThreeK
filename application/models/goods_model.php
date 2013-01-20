@@ -27,7 +27,7 @@ class Goods_model extends CI_Model{
 
         $status = 0;
 
-        $publish_time = date("Y/m/d H:i:s");
+        $publish_time = time();
         $modify_time = $publish_time;
 
         $goods['goodsid'] = $goodsId;
