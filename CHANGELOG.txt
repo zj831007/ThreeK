@@ -1,0 +1,10 @@
+
+
+Threek-v1.0-alpha1  @Jan.20, 2013
+* Threek first version
+* feature support
+* 1, user
+* 2, message
+* 3, goods
+* 4, goods comment
+* 5, img upload
