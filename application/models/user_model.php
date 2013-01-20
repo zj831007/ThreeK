@@ -143,7 +143,7 @@ class User_model extends CI_Model{
      /*
       * 
       */
-     function updateUserInfo($uid,$gender,$desc,$icon,$tel,$email,$nickname){
+     function updateUserInfo($uid,$icon ="",$avatar_orgin = "",$gender = "",$desc = "",$tel = "" ,$email = "",$nickname = ""){
      	$uid = (int)$uid;
      	$uid = $this->db->escape($uid);
      	$table = $this->_getTable($uid);
@@ -169,6 +169,12 @@ class User_model extends CI_Model{
      		$SET = "";
      		$COMMA = ",";
      	}
+         if( false !== $avatar_orgin){
+             $avatar_orgin = $this->db->escape($avatar_orgin);
+             $sql .= "$COMMA$SET `avatar_orgin` = $avatar_orgin ";
+             $SET = "";
+             $COMMA = ",";
+         }
      	if( false !== $tel){
      		$tel = $this->db->escape($tel);
      		$sql .= "$COMMA$SET `tel` = $tel ";

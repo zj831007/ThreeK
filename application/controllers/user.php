@@ -155,13 +155,12 @@ class User extends MY_Controller{
 		$token = $this->input->get_post('access_token');
 		$gender = $this->input->get_post('gender');
 		$desc = $this->input->get_post('desc');
-		$icon = $this->input->get_post('icon');
 		$tel = $this->input->get_post('tel');
 		$email = $this->input->get_post('email');
 		$nickname = $this->input->get_post('nickname');
 		if( $this->_checkUidToken($uid, $token)){
 			//验证成功
-			$ret = $this->User_model->updateUserInfo($uid,$gender,$desc,$icon,$tel,$email,$nickname);
+            $ret = $this->User_model->updateUserInfo($uid,"","",$gender,$desc,$tel,$email,$nickname);
 		}else{
 			//
 		}

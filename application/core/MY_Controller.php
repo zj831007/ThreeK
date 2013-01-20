@@ -17,8 +17,6 @@ abstract class MY_Controller extends CI_Controller {
         // CLog::debug($_SERVER['']);
 
         //$this->load->helper(array('form', 'url', 'date', 'string', 'file', 'directory', 'language'));
-        //$this->load->library('upload');
-
 
     }
 

@@ -142,4 +142,36 @@ class Goods_model extends CI_Model{
     private function getTableName($userId){
         return $this->table_name_prefix.($userId % 10);
     }
+
+
+
+    /**
+     * 获取商品图片
+     * @param $goods_id
+     */
+    function getGoodsPics($goods_id){
+        $goods_id = $this->db->escape($goods_id);
+
+        $sql = "select * from goods_pic where goodsid=$goods_id limit 1";
+        $query = $this->db->query($sql);
+        if( $query->num_rows() > 0 ){
+            $r = current($query->result_array());
+            var_dump($r);
+            return $r;
+        }else{
+            return null;
+        }
+    }
+
+    /**
+     * 替换商品图片
+     * @param $goods_id
+     * @param $pic
+     * @param $small_pic
+     */
+    function replaceGoodsPic($goods_id, $pic, $small_pic){
+        $goods_id = $this->db->escape($goods_id);
+        $sql = "replace into goods_pic set bigpic='".$pic."', smallpic='".$small_pic."', goodsid=".$goods_id;
+        $this->db->query($sql);
+    }
 }

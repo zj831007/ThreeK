@@ -67,21 +67,36 @@
 <body>
 
 <div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
+	<form method="post" enctype="multipart/form-data" action="http://localhost/threek/index.php/img/upload">
+        <table>
+            <tr>
+                <td>uid</td>
+                <td><input name="uid" value="1"></td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>
+                    <select name="type">
+                        <option value="1">头像</option>
+                        <option value="2">商品</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>ext</td>
+                <td><input name="ext" value="1"></td>
+            </tr>
+            <tr>
+                <td>img</td>
+                <td><input type="file" name="img"></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="submit">  </td>
+            </tr>
+        </table>
 
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
 
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
-
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
-	</div>
-
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+	</form>
 </div>
 
 </body>
