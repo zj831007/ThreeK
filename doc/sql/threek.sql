@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 01 月 18 日 10:08
+-- 生成日期: 2013 年 01 月 20 日 11:37
 -- 服务器版本: 5.1.44
 -- PHP 版本: 5.3.1
 
@@ -31,17 +31,12 @@ CREATE TABLE IF NOT EXISTS `goods00` (
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
   `price` varchar(20) NOT NULL,
-  `publishtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `modifytime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publishtime` int(11) NOT NULL,
+  `modifytime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `lon` varchar(20) NOT NULL,
   `lat` varchar(20) NOT NULL,
   `status` tinyint(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `goods00`
---
-
 
 -- --------------------------------------------------------
 
@@ -55,17 +50,12 @@ CREATE TABLE IF NOT EXISTS `goods01` (
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
   `price` varchar(20) NOT NULL,
-  `publishtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `modifytime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publishtime` int(11) NOT NULL,
+  `modifytime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `lon` varchar(20) NOT NULL,
   `lat` varchar(20) NOT NULL,
   `status` tinyint(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `goods01`
---
-
 
 -- --------------------------------------------------------
 
@@ -79,17 +69,12 @@ CREATE TABLE IF NOT EXISTS `goods02` (
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
   `price` varchar(20) NOT NULL,
-  `publishtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `modifytime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publishtime` int(11) NOT NULL,
+  `modifytime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `lon` varchar(20) NOT NULL,
   `lat` varchar(20) NOT NULL,
   `status` tinyint(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `goods02`
---
-
 
 -- --------------------------------------------------------
 
@@ -103,17 +88,12 @@ CREATE TABLE IF NOT EXISTS `goods03` (
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
   `price` varchar(20) NOT NULL,
-  `publishtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `modifytime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publishtime` int(11) NOT NULL,
+  `modifytime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `lon` varchar(20) NOT NULL,
   `lat` varchar(20) NOT NULL,
   `status` tinyint(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `goods03`
---
-
 
 -- --------------------------------------------------------
 
@@ -127,17 +107,12 @@ CREATE TABLE IF NOT EXISTS `goods04` (
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
   `price` varchar(20) NOT NULL,
-  `publishtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `modifytime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publishtime` int(11) NOT NULL,
+  `modifytime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `lon` varchar(20) NOT NULL,
   `lat` varchar(20) NOT NULL,
   `status` tinyint(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `goods04`
---
-
 
 -- --------------------------------------------------------
 
@@ -151,17 +126,12 @@ CREATE TABLE IF NOT EXISTS `goods05` (
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
   `price` varchar(20) NOT NULL,
-  `publishtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `modifytime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publishtime` int(11) NOT NULL,
+  `modifytime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `lon` varchar(20) NOT NULL,
   `lat` varchar(20) NOT NULL,
   `status` tinyint(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `goods05`
---
-
 
 -- --------------------------------------------------------
 
@@ -175,17 +145,12 @@ CREATE TABLE IF NOT EXISTS `goods06` (
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
   `price` varchar(20) NOT NULL,
-  `publishtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `modifytime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publishtime` int(11) NOT NULL,
+  `modifytime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `lon` varchar(20) NOT NULL,
   `lat` varchar(20) NOT NULL,
   `status` tinyint(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `goods06`
---
-
 
 -- --------------------------------------------------------
 
@@ -199,17 +164,12 @@ CREATE TABLE IF NOT EXISTS `goods07` (
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
   `price` varchar(20) NOT NULL,
-  `publishtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `modifytime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publishtime` int(11) NOT NULL,
+  `modifytime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `lon` varchar(20) NOT NULL,
   `lat` varchar(20) NOT NULL,
   `status` tinyint(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `goods07`
---
-
 
 -- --------------------------------------------------------
 
@@ -223,17 +183,12 @@ CREATE TABLE IF NOT EXISTS `goods08` (
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
   `price` varchar(20) NOT NULL,
-  `publishtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `modifytime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publishtime` int(11) NOT NULL,
+  `modifytime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `lon` varchar(20) NOT NULL,
   `lat` varchar(20) NOT NULL,
   `status` tinyint(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `goods08`
---
-
 
 -- --------------------------------------------------------
 
@@ -247,17 +202,12 @@ CREATE TABLE IF NOT EXISTS `goods09` (
   `desc` varchar(300) NOT NULL,
   `userid` int(11) NOT NULL,
   `price` varchar(20) NOT NULL,
-  `publishtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `modifytime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `publishtime` int(11) NOT NULL,
+  `modifytime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `lon` varchar(20) NOT NULL,
   `lat` varchar(20) NOT NULL,
   `status` tinyint(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `goods09`
---
-
 
 -- --------------------------------------------------------
 
@@ -266,18 +216,12 @@ CREATE TABLE IF NOT EXISTS `goods09` (
 --
 
 CREATE TABLE IF NOT EXISTS `goods_pic` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
   `goodsid` varchar(50) NOT NULL,
-  `smallpic` varchar(50) NOT NULL,
-  `bigpic` varchar(50) NOT NULL,
+  `smallpic` varchar(150) NOT NULL,
+  `bigpic` varchar(150) NOT NULL,
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `goods_pic`
---
-
+  UNIQUE KEY `goodsid` (`goodsid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -296,13 +240,9 @@ CREATE TABLE IF NOT EXISTS `user00` (
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
   `mark` varchar(100) NOT NULL,
-  `nickname` varchar(30) NOT NULL
+  `nickname` varchar(30) NOT NULL,
+  `avatar_orgin` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `user00`
---
-
 
 -- --------------------------------------------------------
 
@@ -321,15 +261,9 @@ CREATE TABLE IF NOT EXISTS `user01` (
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
   `mark` varchar(100) NOT NULL,
-  `nickname` varchar(30) NOT NULL
+  `nickname` varchar(30) NOT NULL,
+  `avatar_orgin` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `user01`
---
-
-INSERT INTO `user01` (`userid`, `username`, `gender`, `desc`, `icon`, `tel`, `email`, `createtime`, `status`, `mark`, `nickname`) VALUES
-(1, 'justin', 1, '2', '1.jpg', 'sdfd', '', '2013-01-17 22:10:06', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -348,15 +282,9 @@ CREATE TABLE IF NOT EXISTS `user02` (
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
   `mark` varchar(100) NOT NULL,
-  `nickname` varchar(30) NOT NULL
+  `nickname` varchar(30) NOT NULL,
+  `avatar_orgin` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `user02`
---
-
-INSERT INTO `user02` (`userid`, `username`, `gender`, `desc`, `icon`, `tel`, `email`, `createtime`, `status`, `mark`, `nickname`) VALUES
-(2, 'justin2', 2, 'desc 2', '2.jpg', '22', '22', '2013-01-17 22:11:22', 1, '', '');
 
 -- --------------------------------------------------------
 
@@ -375,13 +303,9 @@ CREATE TABLE IF NOT EXISTS `user03` (
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
   `mark` varchar(100) NOT NULL,
-  `nickname` varchar(30) NOT NULL
+  `nickname` varchar(30) NOT NULL,
+  `avatar_orgin` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `user03`
---
-
 
 -- --------------------------------------------------------
 
@@ -400,13 +324,9 @@ CREATE TABLE IF NOT EXISTS `user04` (
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
   `mark` varchar(100) NOT NULL,
-  `nickname` varchar(30) NOT NULL
+  `nickname` varchar(30) NOT NULL,
+  `avatar_orgin` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `user04`
---
-
 
 -- --------------------------------------------------------
 
@@ -425,13 +345,9 @@ CREATE TABLE IF NOT EXISTS `user05` (
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
   `mark` varchar(100) NOT NULL,
-  `nickname` varchar(30) NOT NULL
+  `nickname` varchar(30) NOT NULL,
+  `avatar_orgin` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `user05`
---
-
 
 -- --------------------------------------------------------
 
@@ -450,13 +366,9 @@ CREATE TABLE IF NOT EXISTS `user06` (
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
   `mark` varchar(100) NOT NULL,
-  `nickname` varchar(30) NOT NULL
+  `nickname` varchar(30) NOT NULL,
+  `avatar_orgin` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `user06`
---
-
 
 -- --------------------------------------------------------
 
@@ -475,13 +387,9 @@ CREATE TABLE IF NOT EXISTS `user07` (
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
   `mark` varchar(100) NOT NULL,
-  `nickname` varchar(30) NOT NULL
+  `nickname` varchar(30) NOT NULL,
+  `avatar_orgin` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `user07`
---
-
 
 -- --------------------------------------------------------
 
@@ -500,13 +408,9 @@ CREATE TABLE IF NOT EXISTS `user08` (
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
   `mark` varchar(100) NOT NULL,
-  `nickname` varchar(30) NOT NULL
+  `nickname` varchar(30) NOT NULL,
+  `avatar_orgin` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `user08`
---
-
 
 -- --------------------------------------------------------
 
@@ -525,13 +429,9 @@ CREATE TABLE IF NOT EXISTS `user09` (
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` tinyint(3) NOT NULL,
   `mark` varchar(100) NOT NULL,
-  `nickname` varchar(30) NOT NULL
+  `nickname` varchar(30) NOT NULL,
+  `avatar_orgin` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- 转存表中的数据 `user09`
---
-
 
 -- --------------------------------------------------------
 
@@ -546,12 +446,3 @@ CREATE TABLE IF NOT EXISTS `uuid` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
-
---
--- 转存表中的数据 `uuid`
---
-
-INSERT INTO `uuid` (`id`, `username`, `passwd`) VALUES
-(1, '1', ''),
-(10, '2', ''),
-(11, '3', '');
