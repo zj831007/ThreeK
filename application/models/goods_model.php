@@ -58,21 +58,73 @@ class Goods_model extends CI_Model{
     /**
      *编辑商品
       */
-    function updateGoods(){
-        $userId = $this->input->get_post('userId');
-        $goodsId = $this->input->get_post('goodsId');
-        $title = $this->input->get_post('title');
-        $desc  = $this->input->get_post('desc');
-        $price = $this->input->get_post('price');
-        $lon  = $this->input->get_post('lon');
-        $lat = $this->input->get_post('lat');
-        $modify_time = date("Y/m/d H:i:s");
+    function updateGoods($goods){
+
+        $userId = $goods['userId'];
+
+        $goodsId = $goods['goodsId'];
+
+        $title = $goods['title'];
+
+        $desc = $goods['desc'];
+
+        $price = $goods['price'];
+
+        $lon = $goods['lon'];
+
+        $lat = $goods['lat'];
+
+        $modify_time = time();
+
         $table_name = $this->getTableName($userId);
+
+
 
         $sql = "UPDATE ".$table_name." set title ='".$title."',desc='".$desc."',price='".$price."',lon='".$lon."',lat='".$lat."',modifytime='".$modify_time."' where goodsid='".$goodsId."'";
 
+
+
         $this->db->query($sql);
+
+        $mongoData = $this->goodsCol->findOne(array(
+
+            'goodsid'=>$goodsId
+
+        ));
+
+        $mongoData = array(
+
+            'goodsid' => $goodsId,
+
+            'title' => $goods['title'],
+
+            'desc' => $goods['desc'],
+
+            'userid' => $userId,
+
+            'price' => $goods['price'],
+
+            'modifytime'=>$modify_time,
+
+            'gps' => array(
+
+                'lon'=> (double)$goods['lon'],
+
+                'lat'=> (double)$goods['lat']
+
+            ),
+
+            'status'=>$status
+
+        );
+
+        $mongoData = $this->goodsCol->save($mongoData);
+
+        $this->goodsCol->save();
+
     }
+
+
 
     /**
      * 获取商品详情
