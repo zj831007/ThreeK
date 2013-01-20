@@ -11,12 +11,12 @@
  */
 class Message_model extends CI_Model{
 
-    const MSG_COLLECTTION = 'message';
+    const MSG_COLLECTION = 'message';
 
     function __construct(){
         parent::__construct();
         $this->load->model('User_model');
-        $this->messageCol = $this->mongodb->selectCollection(self::MSG_COLLECTTION);
+        $this->messageCol = $this->mongodb->selectCollection(self::MSG_COLLECTION);
     }
 
     /**
