@@ -47,8 +47,40 @@ class Goods extends MY_Controller{
      * 编辑商品
      */
     function edit(){
-        $this->Goods_model->updateGoods();
+
+        $userId = $this->input->get_post('userId');
+
+        $title = $this->input->get_post('title');
+
+        $desc = $this->input->get_post('desc');
+
+        $price = $this->input->get_post('price');
+
+        $lon = $this->input->get_post('lon');
+
+        $lat = $this->input->get_post('lat');
+
+        $goods = array(
+
+            "userId" => $userId,
+
+            "title" => $title,
+
+            "desc" => $desc,
+
+            "price"=> $price,
+
+            "lon"=>$lon,
+
+            "lat"=>$lat
+
+        );
+
+        $this->Goods_model->updateGoods($goods);
+
     }
+
+
 
     /**
      * 获取商品详细信息
