@@ -51,8 +51,8 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
-
-$autoload['libraries'] = array('database','mongodb','redis');
+// remove redis
+$autoload['libraries'] = array('database','mongodb');
 
 
 /*
