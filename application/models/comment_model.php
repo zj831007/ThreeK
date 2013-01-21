@@ -102,7 +102,6 @@ class Comment_model extends CI_Model{
                     array("asktime" => -1)
                 );
                 break;
-                break;
 
         }
 
