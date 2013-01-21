@@ -8,6 +8,8 @@
  */
 class Comment extends MY_Controller{
 
+    const DEFAULT_LIST_COUNT = 10;
+
     function __construct(){
         parent::__construct();
         $this->load->model("Comment_model");
@@ -20,9 +22,18 @@ class Comment extends MY_Controller{
     function getList(){
         $goods_id = $this->input->get_post('goods_id');
         $count = $this->input->get_post('count');
-        $page = $this->input->get_post('page');
+        if(empty($count))
+            $count = self::DEFAULT_LIST_COUNT;
 
-        $list = $this->Comment_model->getList($goods_id);
+        $get_time = $this->input->get_post('get_time');
+        if(empty($get_time))
+            $get_time = time();
+
+        $op = $this->input->get_post('op');
+        if(empty($op))
+            $op = -1;  //默认显示更多
+
+        $list = $this->Comment_model->getList($goods_id,$op,$get_time,$count);
 
         echo json_encode($list);
     }
