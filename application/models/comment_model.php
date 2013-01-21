@@ -12,6 +12,8 @@
 class Comment_model extends CI_Model{
 
     const COMMENT_COLLECTION = "comment";
+    const MORE_COMMENT = -1;
+    const REFRESH_COMMENT = 1;
 
     function __construct(){
         parent::__construct();
@@ -76,15 +78,33 @@ class Comment_model extends CI_Model{
     /**
      * 获取咨询列表
      * @param $goods_id
+     * @param $op
+     * @param $get_time
+     * @param $count
+     * @return array
      */
-    function getList($goods_id){
+    function getList($goods_id,$op,$get_time,$count){
 
         $list = array();
-        $listCursor = $this->commentCol->find(
-            array("goods_id" => $goods_id)
-        )->sort(
-            array("asktime" => -1)
-        );
+
+        switch($op){
+            case self::MORE_COMMENT:
+                $listCursor = $this->commentCol->find(
+                    array("goods_id" => $goods_id,"asktime" => array('$lt'=>$get_time))
+                )->limit($count)->sort(
+                    array("asktime" => -1)
+                );
+                break;
+            case self::REFRESH_COMMENT:
+                $listCursor = $this->commentCol->find(
+                    array("goods_id" => $goods_id,"asktime" => array('$gt'=>$get_time))
+                )->limit($count)->sort(
+                    array("asktime" => -1)
+                );
+                break;
+                break;
+
+        }
 
         foreach ( $listCursor as $id => $value ){
             $comment = array(
