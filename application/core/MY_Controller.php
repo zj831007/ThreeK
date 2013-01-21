@@ -16,8 +16,6 @@ abstract class MY_Controller extends CI_Controller {
 
         // CLog::debug($_SERVER['']);
 
-        //$this->load->helper(array('form', 'url', 'date', 'string', 'file', 'directory', 'language'));
-
     }
 
 
@@ -26,6 +24,11 @@ abstract class MY_Controller extends CI_Controller {
         die('error');
     }
 
+    protected  function  _validateToken($userid, $access_token){
+
+
+
+    }
 }
 
 // END MY_Controller Class

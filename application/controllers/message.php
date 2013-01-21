@@ -92,7 +92,6 @@ class Message extends MY_Controller{
      */
     public function del(){
 
-        $access_token = $this->input->get_post("access_token");
         $uid = $this->input->get_post("uid");
         $other_uid = $this->input->get_post("other_uid");
 
@@ -104,6 +103,10 @@ class Message extends MY_Controller{
      * 获取未读私信数量
      */
     public  function unread(){
+
+        $uid = $this->input->get_post("uid");
+
+        $unread_count = $this->Message_model->unreadCount($uid);
 
     }
 }

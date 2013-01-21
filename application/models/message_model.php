@@ -196,9 +196,17 @@ class Message_model extends CI_Model{
         }
 
         //更新新消息计数
+        $readCount = count($detailList);
+        $oldNews = $this->messageCol->findOne(
+            array("_id" => $uid.$otherid)
+        );
+        $news = $oldNews["news"] - $readCount;
+        if($news <0 ) $news = 0;
+
+
         $this->messageCol->update(
             array("_id" => $uid.$otherid),
-            array('$inc' => array("news" => -count($detailList)))
+            array('$set' => array("news" => $news))
         );
 
         return $detailList;
@@ -209,8 +217,17 @@ class Message_model extends CI_Model{
      * @param $uid
      * @param $st
      */
-    function unreadCount($uid, $st){
-        
+    function unreadCount($uid){
 
+        $listCursor = $this->messageCol->find(
+            array("belong" => $uid, "islist" => 1),
+            array("news" => 1)
+        );
+        $totalNews = 0;
+        foreach ( $listCursor as $id => $value ){
+            if(!empty($value["news"]))
+                $totalNews += $value["news"];
+        }
+        echo $totalNews;
     }
 }
