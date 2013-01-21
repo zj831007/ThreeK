@@ -10,6 +10,7 @@
  */
 class Message extends MY_Controller{
 
+    const DEFAULT_LIST_COUNT = 10;
 
     function __construct(){
 
@@ -39,12 +40,22 @@ class Message extends MY_Controller{
      */
     public function getList(){
 
-        $access_token = $this->input->get_post("access_token");
         $uid = $this->input->get_post("uid");
-        $count = $this->input->get_post("count");
-        $page = $this->input->get_post("page");
 
-        $list = $this->Message_model->getList($uid);
+        $count = $this->input->get_post('count');
+        if(empty($count))
+            $count = self::DEFAULT_LIST_COUNT;
+
+        $get_time = $this->input->get_post('get_time');
+        if(empty($get_time))
+            $get_time = time();
+
+        $op = $this->input->get_post('op');
+        if(empty($op))
+            $op = -1;  //默认显示更多
+
+
+        $list = $this->Message_model->getList($uid,$op,$get_time,$count);
 
         echo json_encode($list);
     }
@@ -54,14 +65,23 @@ class Message extends MY_Controller{
      */
     public function getDetailList(){
 
-        $access_token = $this->input->get_post("access_token");
         $uid = $this->input->get_post("uid");
-        $before_time = $this->input->get_post("before_time");
         $other_uid = $this->input->get_post("other_uid");
-        $count = $this->input->get_post("count");
 
-        $detailList = $this->Message_model->show($uid, $other_uid);
+        $count = $this->input->get_post('count');
+        if(empty($count))
+            $count = self::DEFAULT_LIST_COUNT;
 
+        $get_time = $this->input->get_post('get_time');
+        if(empty($get_time))
+            $get_time = time();
+
+        $op = $this->input->get_post('op');
+        if(empty($op))
+            $op = -1;  //默认显示更多
+
+
+        $detailList = $this->Message_model->show($uid, $other_uid,$op,$get_time,$count);
 
         echo json_encode($detailList);
 
