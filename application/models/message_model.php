@@ -12,6 +12,8 @@
 class Message_model extends CI_Model{
 
     const MSG_COLLECTION = 'message';
+    const OP_MORE = -1;
+    const OP_REFRESH = 1;
 
     function __construct(){
         parent::__construct();
@@ -117,14 +119,28 @@ class Message_model extends CI_Model{
      * 返回该用户的信息列表首页
      * @param $uid
      */
-    function getList($uid){
+    function getList($uid,$op,$get_time,$count){
 
         $list = array();
-        $listCursor = $this->messageCol->find(
-            array("belong" => $uid, "islist" => 1)
-        )->sort(
-            array("timestamp" => -1)
-        );
+
+        switch($op){
+            case self::OP_MORE:
+                $listCursor = $this->messageCol->find(
+                    array("belong" => $uid, "islist" => 1,"timestamp" => array('$lt'=>$get_time))
+                )->limit($count)->sort(
+                    array("timestamp" => -1)
+                );
+                break;
+            case self::OP_REFRESH:
+                $listCursor = $this->messageCol->find(
+                    array("belong" => $uid, "islist" => 1,"timestamp" => array('$gt'=>$get_time))
+                )->limit($count)->sort(
+                    array("timestamp" => -1)
+                );
+                break;
+        }
+
+
 
         foreach ( $listCursor as $id => $value ){
             $list[] = $value;
@@ -139,21 +155,40 @@ class Message_model extends CI_Model{
      * @param $uid
      * @param $otherid
      */
-    function show($uid, $otherid){
+    function show($uid, $otherid,$op,$get_time,$count){
 
 
         //返回聊天记录
         $detailList = array();
 
-        $detailListCursor = $this->messageCol->find(
-            array(
-                "belong" => $uid,
-                "islist" => array('$ne' => 1),
-                '$or'    => array(array("from" => $otherid), array("to" => $uid))
-            )
-        )->sort(
-            array("timestamp" => -1)
-        );
+        switch($op){
+            case self::OP_MORE:
+
+                $detailListCursor = $this->messageCol->find(
+                    array(
+                        "belong" => $uid,
+                        "islist" => array('$ne' => 1),
+                        '$or'    => array(array("from" => $otherid), array("to" => $uid)),
+                        "timestamp" => array('$lt'=>$get_time)
+                    )
+                )->limit($count)->sort(
+                    array("timestamp" => -1)
+                );
+                break;
+            case self::OP_REFRESH:
+                $detailListCursor = $this->messageCol->find(
+                    array(
+                        "belong" => $uid,
+                        "islist" => array('$ne' => 1),
+                        '$or'    => array(array("from" => $otherid), array("to" => $uid)),
+                        "timestamp" => array('$gt'=>$get_time)
+                    )
+                )->limit($count)->sort(
+                    array("timestamp" => -1)
+                );
+                break;
+        }
+
 
         foreach ( $detailListCursor as $id => $value ){
             $value["_id"] = $id;
@@ -175,7 +210,7 @@ class Message_model extends CI_Model{
      * @param $st
      */
     function unreadCount($uid, $st){
-
+        
 
     }
 }
