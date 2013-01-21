@@ -21,9 +21,9 @@ class CCommon // used as a namespace
 
     public static function getClientIP()
     {
-        if ($_SERVER["HTTP_X_FORWARDED_FOR"]) {
+        if (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
             $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
-        } elseif ($_SERVER["HTTP_CLIENT_IP"]) {
+        } elseif (!empty($_SERVER["HTTP_CLIENT_IP"])) {
             $ip = $_SERVER["HTTP_CLIENT_IP"];
         } elseif ($_SERVER["REMOTE_ADDR"]) {
             $ip = $_SERVER["REMOTE_ADDR"];
@@ -44,7 +44,8 @@ class CCommon // used as a namespace
 
     public static function getHostname()
     {
-        return $_ENV['HOSTNAME'];
+        if(!empty($_ENV['HOSTNAME']))
+            return $_ENV['HOSTNAME'];
     }
 
     public static function numToIP($num)
@@ -96,12 +97,12 @@ class CCommon // used as a namespace
 		$strPageBar = "";
 		if( $arrPageBarInfo["head_page"] )
 		{
-			$strPageBar .= '<a href="'.$urlPath.'?pageno=0&'.$queryParams.'">[Ê×Ò³]</a>&nbsp;';
+			$strPageBar .= '<a href="'.$urlPath.'?pageno=0&'.$queryParams.'">[ï¿½ï¿½Ò³]</a>&nbsp;';
 		}
 		if( $arrPageBarInfo["pre_page"] )
 		{
 			$strPageBar .= '<a href="'.$urlPath.'?pageno='.($arrPageBarInfo["current_page"] - 2).
-							'&'.$queryParams.'">[ÉÏÒ»Ò³]</a>&nbsp;';
+							'&'.$queryParams.'">[ï¿½ï¿½Ò»Ò³]</a>&nbsp;';
 		}
 
 		for( $i = $arrPageBarInfo["start_page"]; $i <= $arrPageBarInfo["end_page"]; ++$i )
@@ -119,7 +120,7 @@ class CCommon // used as a namespace
 		if( $arrPageBarInfo["next_page"] )
 		{
 			$strPageBar .= '<a href="'.$urlPath.'?pageno='.$arrPageBarInfo["current_page"].
-							'&'.$queryParams.'">[ÏÂÒ»Ò³]</a>&nbsp;';
+							'&'.$queryParams.'">[ï¿½ï¿½Ò»Ò³]</a>&nbsp;';
 		}
 		if( $arrPageBarInfo["tail_page"] )
 		{
