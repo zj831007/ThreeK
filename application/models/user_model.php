@@ -11,9 +11,12 @@
  */
 class User_model extends CI_Model{
 
+    const USER_COLLECTTION = 'user';
+    private $userCollection = null;
 
     function __construct(){
         parent::__construct();
+        $this->userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
     }
 	/**
 	 * @var unknown_type
@@ -214,4 +217,52 @@ class User_model extends CI_Model{
      	$tableIndex = $uuid % self::userTableCnt;
      	return "user".sprintf("%02d",$tableIndex);
      }
+
+
+
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //+++++++++++  Mongodb operation
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    /**
+     * 验证toekn与用户名是否有效
+     * @param string $uid
+     * @param string $token
+     * @return boolean
+     */
+     function checkUidToken($uid,$token){
+        $userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
+        $query = array('uid' => $uid,'access_token' => $token);
+        $tmp = $userCollection->findOne($query);
+        if($tmp){
+            //验证通过
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    /**
+     * 生成Token 更改为登陆状态
+     * @param unknown_type $uid
+     * @return string
+     */
+     function genToken($uid){
+        $ret = array();
+        $userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
+        $ret['uid'] = $uid;
+        $token = md5($uid.time().uniqid(mt_rand(10000,99999)));
+        $ret['access_token'] = $token;
+        $tmp = $userCollection->findOne(array("uid" => $ret['uid']));
+        if($tmp){
+            //登录过
+            $userCollection->remove(array("uid" => $ret['uid']));
+        }else{
+            //第一次登录
+        }
+        $ret['status'] = '1';
+        $userCollection->insert($ret);
+        return $token;
+    }
+
 }

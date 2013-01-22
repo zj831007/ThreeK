@@ -10,98 +10,88 @@
  */
 class User extends MY_Controller{
 
-	
-	const USER_COLLECTTION = 'user';
-	private $userCollection = null;
+
     function __construct(){
 
         parent::__construct();
         $this->load->model('User_model');
-        $this->userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
+
     }
 
-	/**
-	 * 生成Token 更改为登陆状态
-	 * @param unknown_type $uid
-	 * @return string
-	 */    	
-    private function _genToken($uid){
-    	$ret = array();
-    	$userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
-    	$ret['uid'] = $uid;
-    	$token = md5($uid.time().uniqid(mt_rand(10000,99999)));
-    	$ret['access_token'] = $token;
-    	$tmp = $userCollection->findOne(array("uid" => $ret['uid']));
-    	if($tmp){
-    		//登录过
-    		$userCollection->remove(array("uid" => $ret['uid']));
-    	}else{
-    		//第一次登录
-    	}
-    	$ret['status'] = '1';
-    	$userCollection->insert($ret);
-    	return $token;
-    }
-    
     /**
-     * 验证toekn与用户名是否有效
-     * @param string $uid
-     * @param string $token
-     * @return boolean
+     * 用户名密码校验
+     * @param $username
+     * @param $password
      */
-    private function _checkUidToken($uid,$token){
-    	$userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
-    	$query = array('uid' => $uid,'access_token' => $token);
-    	$tmp = $userCollection->findOne($query);
-    	if($tmp){
-    		//验证通过
-    		return true;
-    	}else{
-    		return false;
-    	}
+    private function _validate($username, $password){
+        //TODO
+        if(empty($username)){
+            tkProcessError("10002");
+        }
+        if(empty($password)){
+            tkProcessError("10004");
+        }
     }
-
     /**
      * 用户注册
-     * 访问方法：http://localhost/threek/index.php/user/reg?account=3&password=eeeqr
+     *
      */
     public function reg(){
         $username = $this->input->get_post("account");
         $password = $this->input->get_post("password");
-        //效验参数：TODO
+        //效验参数：
+        $this->_validate($username, $password);
+
         $ret = $this->User_model->insertNewUser($username, $password);
         if(isset($ret['uid'])){
-        	$token = $this->_genToken($ret['uid']);
-        	$ret['access_token'] = $token;
+        	$token = $this->User_model->genToken($ret['uid']);
+
+            //此处加入设置用户上线状态 TODO
+
+            //注册成功，返回token,uid
+        	$info['access_token'] = $token;
+        	$info['uid'] = $ret['uid'];
+
+            echo json_encode($info);
+        }else{
+            if($ret["ret"] == 1){
+                tkProcessError("10006");
+            }else{
+                tkProcessError("99999");
+            }
         }
-        echo json_encode($ret);
     }
     
     /** 
      * 用户登录
-     * 访问方法：http://localhost/threek/index.php/user/login?account=3&password=eeeqr
+     *
      */
 	public function login(){
 		$ret = array();
 		$username = $this->input->get_post("account");
 		$password = $this->input->get_post("password");
+		$push_token = $this->input->get_post("push_token");
+
+
 		$userInfo = $this->User_model->checkUserPasswd($username,$password);
 		if($userInfo){
+            //TODO 保存push_token
+
+
 			//login_success
-			$ret['uid'] = $userInfo['id'];
-			$token = $this->_genToken($ret['uid']);
-			$ret['access_token'] = $token;
+			$token = $this->User_model->genToken($userInfo['id']);
+            $info['access_token'] = $token;
+            $info['uid'] = $userInfo['id'];
+            echo json_encode($info);
 		}else{
-			//login failed
-			$ret['uid'] = "";
-			$ret['access_token'] = "";
+            //帐号或密码错误
+            tkProcessError("10001");
 		}
-		echo json_encode($ret);
 	}
 
 	/**
 	 * 用户注销
-	 * 访问方法：http://localhost/threek/index.php/user/logout?uid=3&access_token=123
+     *
 	 */
 	public function logout(){
 		$uid = $this->input->get_post("uid");
@@ -110,9 +100,10 @@ class User extends MY_Controller{
 		$userCollection->remove( array("uid" => $uid, "access_token"=> $token));
 		echo json_encode(array());
 	}
+
 	/**
-	 * 用户注销
-	 * 访问方法：http://localhost/threek/index.php/user/status?uid=3&access_token=123&op=1
+	 * 用户上线/下线
+     *
 	 */
 	public function status(){
 		$ret = array();
@@ -120,7 +111,7 @@ class User extends MY_Controller{
 		$token = $this->input->get_post("access_token");
 		$op = $this->input->get_post("op");
 		
-		if( $this->_checkUidToken($uid, $token)){
+		if( $this->User_model->checkUidToken($uid, $token)){
 			//验证通过
 			if( 1 == $op ){
 				$newdata = array('$set' => array("status" => "1"));
@@ -130,24 +121,32 @@ class User extends MY_Controller{
 				$ret['status'] = "2";
 			}
 			$this->userCollection->update(array('uid'=>$uid,'access_token'=>$token),$newdata);
+
+            //操作成功：
+            tkProcessError("88888");
+        }else{
+			//操作失败,登录过期
+            tkProcessError("10005");
 		}
-		else{
-			$ret['status'] = "2";
-		}
-		echo json_encode($ret);
+
 	}
+
 	/**
 	 * 获取个人信息
-	 * 访问方法：http://localhost/threek/index.php/user/profile?uid=3
+     *
 	 */
 	public function profile(){
 		$uid = $this->input->get_post("uid");
 		$profile = $this->User_model->getUserInfo($uid);
+
+        //TODO 个人信息不全：｛avatar, nickname, intro, sex, goods_count, online｝
+
 		echo json_encode($profile);
 	}
+
 	/**
 	 * 修改用户信息
-	 * 访问方法：http://localhost/threek/index.php/user/editProfile?uid=3&access_token=123&gender=1&desc=desc123&icon=http://www.baidu.com&tel=1234567890&email=aa@aa.com&nickname=123
+     *
 	 */
 	public function editProfile(){
 		$ret = array();
@@ -158,12 +157,15 @@ class User extends MY_Controller{
 		$tel = $this->input->get_post('tel');
 		$email = $this->input->get_post('email');
 		$nickname = $this->input->get_post('nickname');
-		if( $this->_checkUidToken($uid, $token)){
+		if( $this->User_model->checkUidToken($uid, $token)){
 			//验证成功
             $ret = $this->User_model->updateUserInfo($uid,"","",$gender,$desc,$tel,$email,$nickname);
+
+            //操作成功：
+            tkProcessError("88888");
 		}else{
-			//
+            //操作失败,登录过期
+            tkProcessError("10005");
 		}
-		echo json_encode($ret);
 	}
 }
