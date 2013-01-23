@@ -23,6 +23,8 @@ class Img extends MY_Controller{
      */
     public function upload(){
 
+        parent::_validateToken();
+
         $uid = $this->input->get_post("uid");
         $ext = $this->input->get_post("ext");
         $type = $this->input->get_post("type");
