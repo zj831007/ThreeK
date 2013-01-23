@@ -43,11 +43,15 @@ class Comment extends MY_Controller{
      * 回复咨询
      */
     function reply(){
+        parent::_validateToken();
+
         $c_id = $this->input->get_post('c_id');
         $answer = $this->input->get_post('answer');
 
         $this->Comment_model->insertReply($c_id, $answer);
 
+        //操作成功：
+        tkProcessError("88888");
     }
 
     /**
