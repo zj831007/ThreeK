@@ -23,11 +23,11 @@ class Comment extends MY_Controller{
         $goods_id = $this->input->get_post('goods_id');
         $count = $this->input->get_post('count');
         if(empty($count))
-            $count = self::DEFAULT_LIST_COUNT;
+            $count = self::DEFAULT_LIST_COUNT; //默认10条
 
         $get_time = $this->input->get_post('get_time');
         if(empty($get_time))
-            $get_time = time();
+            $get_time = time();  //默认当前时间
 
         $op = $this->input->get_post('op');
         if(empty($op))
