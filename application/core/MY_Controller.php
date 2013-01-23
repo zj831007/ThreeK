@@ -12,7 +12,7 @@ abstract class MY_Controller extends CI_Controller {
 
         parent::__construct();
         $this->load->helper("commonfun");
-
+        $this->load->model('User_model');
 
         // CLog::debug($_SERVER['']);
 
@@ -24,9 +24,15 @@ abstract class MY_Controller extends CI_Controller {
         die('error');
     }
 
-    protected  function  _validateToken($userid, $access_token){
+    protected  function  _validateToken(){
 
+        $uid = $this->input->get_post('uid');
+        $token = $this->input->get_post('access_token');
 
+        if(! $this->User_model->checkUidToken($uid, $token)){
+            //操作失败,登录过期
+            tkProcessError("10005");
+        }
 
     }
 }
