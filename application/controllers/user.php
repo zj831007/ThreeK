@@ -70,7 +70,7 @@ class User extends MY_Controller{
 		$ret = array();
 		$username = $this->input->get_post("account");
 		$password = $this->input->get_post("password");
-		$push_token = $this->input->get_post("push_token");
+
 
 
 		$userInfo = $this->User_model->checkUserPasswd($username,$password);
@@ -157,6 +157,10 @@ class User extends MY_Controller{
 		$tel = $this->input->get_post('tel');
 		$email = $this->input->get_post('email');
 		$nickname = $this->input->get_post('nickname');
+
+        $push_token = $this->input->get_post("push_token"); //IOS push用
+
+
 		if( $this->User_model->checkUidToken($uid, $token)){
 			//验证成功
             $ret = $this->User_model->updateUserInfo($uid,"","",$gender,$desc,$tel,$email,$nickname);
