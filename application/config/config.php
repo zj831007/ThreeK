@@ -372,6 +372,8 @@ $config['proxy_ips'] = '';
 */
 $config["img_upload_path"] = "/Applications/XAMPP/htdocs/";
 
+$config["img_upload_base_path"] = "http://127.0.0.1/";
+
 
 
 
