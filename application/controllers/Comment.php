@@ -58,12 +58,16 @@ class Comment extends MY_Controller{
      * 咨询
      */
     function post(){
+        parent::_validateToken();
+
         $goods_id = $this->input->get_post("goods_id");
         $uid = $this->input->get_post("uid");
         $question = $this->input->get_post("question");
 
 
         $this->Comment_model->insert($uid, $goods_id, $question);
+        //操作成功：
+        tkProcessError("88888");
 
     }
 
