@@ -37,6 +37,14 @@ $config['error_def'] = array(
         "error_code"=>"10006",
         "error_desc"=>"Username has existed",
     ),
+    "10007" => array(
+        "error_code"=>"10007",
+        "error_desc"=>"Can’t create image upload path",
+    ),
+    "10008" => array(
+        "error_code"=>"10008",
+        "error_desc"=>"Upload img error",
+    ),
 );
 
 
