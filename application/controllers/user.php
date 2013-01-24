@@ -28,8 +28,17 @@ class User extends MY_Controller{
         if(empty($username)){
             tkProcessError("10002");
         }
+        if( 0 !== preg_match('/^1[0-9]{10}$/',$username) ){
+        	tkProcessError("10003");
+        }
+        if( 0 === preg_match('/^[a-zA-Z0-9_@\.]{4,20}$/',$username) ){
+        	tkProcessError("10009");
+        }
         if(empty($password)){
             tkProcessError("10004");
+        }
+        if( 0 === preg_match('/^[a-zA-Z0-9_]{6,18}$/',$password) ){
+        	tkProcessError("10010");
         }
     }
     /**
