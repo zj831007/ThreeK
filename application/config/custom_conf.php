@@ -50,6 +50,18 @@ $config['error_def'] = array(
         "error_code"=>"20002",
         "error_desc"=>"Upload img error",
     ),
+    "10009" => array(
+    		"error_code"=>"10009",
+    		"error_desc"=>"Username is not a correct pattern",
+    ),
+    "10010" => array(
+    		"error_code"=>"10010",
+    		"error_desc"=>"PassWord is not a correct pattern",
+    ),
+    "10011" => array(
+    		"error_code"=>"10010",
+    		"error_desc"=>"the Username is not allowed",
+    ),
 );
 
 
