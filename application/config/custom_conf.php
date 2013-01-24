@@ -65,21 +65,24 @@ $config['error_def'] = array(
 
     "30000" => array(
         "error_code"=>"30000",
-        "error_desc"=>"发布商品失败",
+        "error_desc"=>"Publish goods failed",
     ),
     "30001" => array(
         "error_code"=>"30001",
-        "error_desc"=>"编辑商品失败",
+        "error_desc"=>"Edit goods failed",
     ),
     "30002" => array(
         "error_code"=>"30002",
-        "error_desc"=>"获取商品详情出错误",
+        "error_desc"=>"Get good detail failed",
     ),
     "30003" => array(
         "error_code"=>"30003",
-        "error_desc"=>"下架商品失败",
+        "error_desc"=>"Offline goods failed",
     ),
-
+    "30004" => array(
+        "error_code"=>"30004",
+        "error_desc"=>"Beyond the max publish limit",
+    ),
 
 );
 

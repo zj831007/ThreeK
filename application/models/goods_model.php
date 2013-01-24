@@ -283,12 +283,10 @@ class Goods_model extends CI_Model{
      * @return $total 商品数
      */
     function getAllGoodsCntByUser( $userId ){
-    	$sql = "SELECT count(*) as `total` from ".$this->getTableName($userId)." where userid=".$userId." and status= 1";
-    	$rs =  $this->db->query($sql)->result();
-    	if($rs){
-    		return (int)$rs[0]->total;
-    	}
-    	return 0;
+
+        $count = $this->goodsCol->find(array("userid"=>$userId, "status" => self::GOODS_STATUS_ONLINE))->count();
+
+    	return $count;
     }
     
 }

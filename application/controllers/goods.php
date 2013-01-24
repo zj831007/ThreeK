@@ -8,6 +8,8 @@
  */
 class Goods extends MY_Controller{
 
+    const MAX_PUBLISH_GOODS_NUM = 5;  //能免费发布最在商品数量
+
      function __construct(){
         parent::__construct();
         $this->load->model("Goods_model");
@@ -34,7 +36,10 @@ class Goods extends MY_Controller{
         if(empty($goods_id)){
 
             //判断用户在线商品数量，
-
+            $currCount = $this->Goods_model->getAllGoodsCntByUser($uid);
+            if($currCount >= self::MAX_PUBLISH_GOODS_NUM){
+                tkProcessError(30004);
+            }
 
             //发布新商品
             $goods_id = $this->Goods_model->insertNewGoods($uid, $title, $desc, $money, $lon, $lat);
