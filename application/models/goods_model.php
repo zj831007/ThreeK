@@ -269,4 +269,19 @@ class Goods_model extends CI_Model{
         $sql = "replace into goods_pic set bigpic='".$pic."', smallpic='".$small_pic."', goodsid=".$goods_id;
         $this->db->query($sql);
     }
+    
+    /**
+     * 获取用户所有在架商品
+     * @param $userId
+     * @return $total 商品数
+     */
+    function getAllGoodsCntByUser( $userId ){
+    	$sql = "SELECT count(*) as `total` from ".$this->getTableName($userId)." where userid=".$userId." and status= 1";
+    	$rs =  $this->db->query($sql)->result();
+    	if($rs){
+    		return (int)$rs[0]->total;
+    	}
+    	return 0;
+    }
+    
 }

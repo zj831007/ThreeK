@@ -231,7 +231,7 @@ class User_model extends CI_Model{
      */
      function checkUidToken($uid,$token){
         $userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
-        $query = array('uid' => $uid,'access_token' => $token);
+        $query = array('uid' => (int)$uid,'access_token' => $token);
         $tmp = $userCollection->findOne($query);
         if($tmp){
             //验证通过
@@ -260,9 +260,40 @@ class User_model extends CI_Model{
         }else{
             //第一次登录
         }
-        $ret['status'] = '1';
+        $ret['status'] = 1;
         $userCollection->insert($ret);
         return $token;
     }
-
+    /**
+     * 判断用户登录状态
+     * @param $uid 用户ID
+     * @return 用户登录状态 1在线 0离线 
+     */
+    function getOnlineStatus($uid){
+    	$ret = array();
+    	$userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
+    	$query = array('uid' => (int)$uid);
+    	$tmp = $userCollection->findOne($query);
+    	if($tmp){
+    		return (int)$tmp['status'];
+    	}
+    	return 0;
+    }
+    
+    /**
+     * @param $uid 用户id
+     * @param $key key
+     * @param $value value
+     */
+    function setUserMongoKV($uid,$key,$value){
+    	$userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
+    	$query = array('uid' => (int)$uid);
+    	$newdata = array('$set' => array("$key" => $value));
+    	$tmp = $userCollection->update(array('uid'=>(int)$uid),$newdata);
+    	if($tmp && 1 == $tmp['ok'] ){
+    		return $tmp['ok'];
+    	}else{
+    		return 0;
+    	}
+    }
 }

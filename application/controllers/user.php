@@ -14,6 +14,7 @@ class User extends MY_Controller{
 
         parent::__construct();
         $this->load->model('User_model');
+        $this->load->model('Goods_model');
 
     }
     
@@ -133,11 +134,11 @@ class User extends MY_Controller{
 		if( $this->User_model->checkUidToken($uid, $token)){
 			//验证通过
 			if( 1 == $op ){
-				$newdata = array('$set' => array("status" => "1"));
-				$ret['status'] = "1";
+				$newdata = array('$set' => array("status" => 1));
+				$ret['status'] = 1;
 			}else{
-				$newdata = array('$set' => array("status" => "2"));
-				$ret['status'] = "2";
+				$newdata = array('$set' => array("status" => 2));
+				$ret['status'] = 2;
 			}
 			$this->userCollection->update(array('uid'=>$uid,'access_token'=>$token),$newdata);
 
@@ -157,10 +158,17 @@ class User extends MY_Controller{
 	public function profile(){
 		$uid = $this->input->get_post("uid");
 		$profile = $this->User_model->getUserInfo($uid);
-
         //TODO 个人信息不全：｛avatar, nickname, intro, sex, goods_count, online｝
-
-		echo json_encode($profile);
+		$result = array();
+		if($profile){
+			$result['avatar'] = $profile['icon'];
+			$result['nickname'] = $profile['nickname'];
+			$result['intro'] = $profile['desc'];
+			$result['sex'] = $profile['gender'];
+			$result['goods_count'] = $this->Goods_model->getAllGoodsCntByUser($uid);
+			$result['online'] = $this->User_model->getOnlineStatus($uid);
+		}
+		echo json_encode($result);
 	}
 
 	/**
@@ -183,7 +191,9 @@ class User extends MY_Controller{
 		if( $this->User_model->checkUidToken($uid, $token)){
 			//验证成功
             $ret = $this->User_model->updateUserInfo($uid,"","",$gender,$desc,$tel,$email,$nickname);
-
+            if( $push_token ){
+            	$this->User_model->setUserMongoKV($uid,"push_token",$push_token);
+            }
             //操作成功：
             tkProcessError("88888");
 		}else{
