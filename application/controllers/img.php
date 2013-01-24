@@ -31,7 +31,7 @@ class Img extends MY_Controller{
 
         $img_path = $this->Img_model->checkUploadPath($uid, $type, $ext);
         if(empty($img_path)){
-            tkProcessError("10007");
+            tkProcessError("20001");
         }
 
         $config['upload_path'] = $img_path;
@@ -47,7 +47,7 @@ class Img extends MY_Controller{
         if ( ! $this->upload->do_upload("img")){
             //$error = $this->upload->display_errors();
 
-            tkProcessError("10008");
+            tkProcessError("20002");
         }else{
             $data = $this->upload->data();
 
