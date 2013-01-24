@@ -264,5 +264,21 @@ class User_model extends CI_Model{
         $userCollection->insert($ret);
         return $token;
     }
+    /**
+     * 判断用户登录状态
+     * @param $uid 用户ID
+     * @return 用户登录状态 1在线 0离线 
+     */
+    function getOnlineStatus($uid){
+    	$ret = array();
+    	$userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
+    	$query = array('uid' => $uid);
+    	$tmp = $userCollection->findOne($query);
+    	if($tmp){
+    		return $tmp['status'];
+    	}
+    	return 0;
+    }
+    
 
 }
