@@ -9,14 +9,19 @@
  * To change this template use File | Settings | File Templates.
  */
 class User extends MY_Controller{
-
-
+	
     function __construct(){
 
         parent::__construct();
         $this->load->model('User_model');
 
     }
+    
+    static $forbiddenWords = array(
+    				"lihongming",
+    				"admin",
+    				"zhubajie",
+    		);
 
     /**
      * 用户名密码校验
@@ -33,6 +38,11 @@ class User extends MY_Controller{
         }
         if( 0 === preg_match('/^[a-zA-Z0-9_@\.]{4,20}$/',$username) ){
         	tkProcessError("10009");
+        }
+        foreach(User::$forbiddenWords as $words){
+        	if( stristr($username,$words) ){
+        		tkProcessError("10011");
+        	}
         }
         if(empty($password)){
             tkProcessError("10004");

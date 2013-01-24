@@ -53,6 +53,10 @@ $config['error_def'] = array(
     		"error_code"=>"10010",
     		"error_desc"=>"PassWord is not a correct pattern",
     ),
+    "10011" => array(
+    		"error_code"=>"10010",
+    		"error_desc"=>"the Username is not allowed",
+    ),
 );
 
 
