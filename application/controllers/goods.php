@@ -73,13 +73,13 @@ class Goods extends MY_Controller{
      * 获取商品详细信息
      */
     function detail(){
-        $userId = $this->input->get_post('userId');
-        $goodsId = $this->input->get_post('goodsId');
-        $goodsInfo = $this->Goods_model->getGoods($userId,$goodsId);
-        if($goodsId){
+        $goods_id = $this->input->get_post('goods_id');
+        $goodsInfo = $this->Goods_model->getGoodDetail($goods_id);
+        if($goodsInfo){
+            unset($goodsInfo["_id"]);
             echo json_encode($goodsInfo);
         }else{
-            echo "";
+            tkProcessError(30002);
         }
     }
 

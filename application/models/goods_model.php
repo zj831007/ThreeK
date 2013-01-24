@@ -11,8 +11,8 @@ class Goods_model extends CI_Model{
     private $table_name_prefix = "goods0";
 
     const GOOD_COLLECTION = "goods";
-    const GOODS_STATUS_ONLINE = 1;
-    const GOODS_STATUS_OFFLINE = 0;
+    const GOODS_STATUS_ONLINE = 1;   //商品发布中
+    const GOODS_STATUS_OFFLINE = 0;  //商品下架
 
     function __construct(){
         parent::__construct();
@@ -83,43 +83,43 @@ class Goods_model extends CI_Model{
         $SET = "SET";
         $COMMA = "";
         if( false !== $title){
-            $title = $this->db->escape($title);
-            $sql .= "$COMMA$SET `title` = $title ";
+            $title1 = $this->db->escape($title);
+            $sql .= "$COMMA$SET `title` = $title1 ";
             $SET = "";
             $COMMA = ",";
         }
 
         if( false !== $desc){
-            $desc = $this->db->escape($desc);
-            $sql .= "$COMMA$SET `desc` = $desc ";
+            $desc1 = $this->db->escape($desc);
+            $sql .= "$COMMA$SET `desc` = $desc1 ";
             $SET = "";
             $COMMA = ",";
         }
 
         if( false !== $money){
-            $money = $this->db->escape($money);
-            $sql .= "$COMMA$SET `price` = $money ";
+            $money1 = $this->db->escape($money);
+            $sql .= "$COMMA$SET `price` = $money1 ";
             $SET = "";
             $COMMA = ",";
         }
 
         if( false !== $lon){
-            $lon = $this->db->escape($lon);
-            $sql .= "$COMMA$SET `lon` = $lon ";
+            $lon1 = $this->db->escape($lon);
+            $sql .= "$COMMA$SET `lon` = $lon1 ";
             $SET = "";
             $COMMA = ",";
         }
 
         if( false !== $lat){
-            $lat = $this->db->escape($lat);
-            $sql .= "$COMMA$SET `lat` = $lat ";
+            $lat1 = $this->db->escape($lat);
+            $sql .= "$COMMA$SET `lat` = $lat1 ";
             $SET = "";
             $COMMA = ",";
         }
 
         if( false !== $status){
-            $status = $this->db->escape($status);
-            $sql .= "$COMMA$SET `status` = $status ";
+            $status1 = $this->db->escape($status);
+            $sql .= "$COMMA$SET `status` = $status1 ";
             $SET = "";
             $COMMA = ",";
         }
@@ -175,9 +175,11 @@ class Goods_model extends CI_Model{
      * @param $userId
      * @return mixed
      */
-    function getGoods($userId,$goodsId){
-        $rs = $this->db->get_where($this->getTableName($userId),array("goodsid" => $goodsId));
-        return $rs->row_array();
+    function getGoodDetail($goodsId){
+        $detail = $this->goodsCol->findOne(array(
+            "goodsid" => $goodsId
+        ));
+        return $detail;
     }
 
     /**

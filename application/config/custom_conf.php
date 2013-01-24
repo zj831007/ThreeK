@@ -71,6 +71,12 @@ $config['error_def'] = array(
         "error_code"=>"30001",
         "error_desc"=>"编辑商品失败",
     ),
+    "30002" => array(
+        "error_code"=>"30002",
+        "error_desc"=>"获取商品详情出错误",
+    ),
+
+
 );
 
 
