@@ -31,7 +31,7 @@ abstract class MY_Controller extends CI_Controller {
 
         if(! $this->User_model->checkUidToken($uid, $token)){
             //操作失败,登录过期
-            tkProcessError("10005");
+           // tkProcessError("10005");
         }
 
     }
