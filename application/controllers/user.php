@@ -191,7 +191,9 @@ class User extends MY_Controller{
 		if( $this->User_model->checkUidToken($uid, $token)){
 			//验证成功
             $ret = $this->User_model->updateUserInfo($uid,"","",$gender,$desc,$tel,$email,$nickname);
-
+            if( $push_token ){
+            	$this->User_model->setUserMongoKV($uid,"push_token",$push_token);
+            }
             //操作成功：
             tkProcessError("88888");
 		}else{
