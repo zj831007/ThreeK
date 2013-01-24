@@ -75,6 +75,10 @@ $config['error_def'] = array(
         "error_code"=>"30002",
         "error_desc"=>"获取商品详情出错误",
     ),
+    "30003" => array(
+        "error_code"=>"30003",
+        "error_desc"=>"下架商品失败",
+    ),
 
 
 );

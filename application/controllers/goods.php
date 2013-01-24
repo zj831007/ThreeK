@@ -104,9 +104,19 @@ class Goods extends MY_Controller{
      * 下架商品
      */
     function offline(){
-        $userId = $this->input->get_post('userId');
-        $goodsId = $this->input->get_post('goodsId');
-        echo $this->Goods_model->offlineGoods($goodsId,$userId);
+        parent::_validateToken();
+
+        $uid = $this->input->get_post('uid');
+        $goodsId = $this->input->get_post('goods_id');
+        $rs =  $this->Goods_model->offlineGoods($goodsId,$uid);
+
+        if($rs){
+            //操作成功
+            tkProcessError(88888);
+        }else{
+            //下架失败
+            tkProcessError(30003);
+        }
     }
 
     /**
@@ -114,7 +124,6 @@ class Goods extends MY_Controller{
      * 包括根据地理位置获取和获取某人的商品列表
      */
     function getList(){
-        $access_token = $this->input->get_post('access_token');
         $count = $this->input->get_post('count');
         $page = $this->input->get_post('page');
 

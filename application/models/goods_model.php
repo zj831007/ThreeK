@@ -188,14 +188,19 @@ class Goods_model extends CI_Model{
      * @param $userId
      */
     function offlineGoods($goodsId,$userId){
-        $sql = "UPDATE ".$this->getTableName($userId)." set status=1 where goodsid='".$goodsId."'";
-        $mongoQuery = array(
-          "goodsid"=>$goodsId
-        );
-        $targetGoods = $this->goodsCol->findOne($mongoQuery)->getNext();
-        $targetGoods["status"] = 1;
-        $this->goodsCol->save($targetGoods);
-        return $this->db->query($sql);
+        $sql = "UPDATE ".$this->getTableName($userId)." set status=".self::GOODS_STATUS_OFFLINE." where goodsid='".$goodsId."'";
+        $this->db->query($sql);
+        if($this->db->affected_rows()){
+           return  $this->goodsCol->update(
+                array(
+                "goodsid"=>$goodsId
+            ), array(
+                '$set' => array("status" => self::GOODS_STATUS_OFFLINE)
+            ));
+        }else{
+            return null;
+        }
+
     }
 
     /**
