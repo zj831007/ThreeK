@@ -2,6 +2,11 @@
 
 /**
  * 错误码定义
+ * 10000—用户相关
+ * 20000—图片相关
+ * 30000—商品相关
+ * 40000—商品咨询相关
+ * 50000—私信相关
  */
 $config['error_def'] = array(
 
@@ -37,12 +42,12 @@ $config['error_def'] = array(
         "error_code"=>"10006",
         "error_desc"=>"Username has existed",
     ),
-    "10007" => array(
-        "error_code"=>"10007",
+    "20001" => array(
+        "error_code"=>"20001",
         "error_desc"=>"Can’t create image upload path",
     ),
-    "10008" => array(
-        "error_code"=>"10008",
+    "20002" => array(
+        "error_code"=>"20002",
         "error_desc"=>"Upload img error",
     ),
 );
