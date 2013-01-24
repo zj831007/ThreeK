@@ -76,8 +76,25 @@ class Goods extends MY_Controller{
         $goods_id = $this->input->get_post('goods_id');
         $goodsInfo = $this->Goods_model->getGoodDetail($goods_id);
         if($goodsInfo){
-            unset($goodsInfo["_id"]);
-            echo json_encode($goodsInfo);
+
+            $goodDetail = array(
+                "goodsid" => $goodsInfo["goodsid"],
+                "title" => $goodsInfo["title"],
+                "desc" => $goodsInfo["desc"],
+                "userid" => $goodsInfo["userid"],
+                "price" => $goodsInfo["price"],
+                "publishtime" => $goodsInfo["publishtime"],
+                "status" => $goodsInfo["status"],
+                "goodsid" => $goodsInfo["goodsid"],
+                "goodsid" => $goodsInfo["goodsid"],
+            );
+            $gps = $goodsInfo["gps"];
+            if(is_array($gps)){
+                $goodDetail["lon"] = $gps["lon"];
+                $goodDetail["lat"] = $gps["lat"];
+            }
+
+            echo json_encode($goodDetail);
         }else{
             tkProcessError(30002);
         }
