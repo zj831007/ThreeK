@@ -83,6 +83,10 @@ $config['error_def'] = array(
         "error_code"=>"30004",
         "error_desc"=>"Beyond the max publish limit",
     ),
+    "30005" => array(
+        "error_code"=>"30005",
+        "error_desc"=>"Search goods list error",
+    ),
 
 );
 

@@ -14,6 +14,14 @@ class Goods_model extends CI_Model{
     const GOODS_STATUS_ONLINE = 1;   //商品发布中
     const GOODS_STATUS_OFFLINE = 0;  //商品下架
 
+    const OP_MORE = -1;
+    const OP_REFRESH = 1;
+
+
+    /**
+     *
+     * db.goods.ensureIndex({"gps":"2d","publishtime":-1,"title":1})
+     */
     function __construct(){
         parent::__construct();
         $this->goodsCol = $this->mongodb->selectCollection(self::GOOD_COLLECTION);
@@ -41,8 +49,8 @@ class Goods_model extends CI_Model{
             'price' => $money,
             'publishtime'=> $publishtime,
             'gps' => array(
-                'lon'=> $lon,
-                'lat'=> $lat
+                'lon'=> doubleval($lon),
+                'lat'=> doubleval($lat)
             ),
             'status'=> $status
         );
@@ -146,11 +154,15 @@ class Goods_model extends CI_Model{
             }
             if($status){
                 $mongoData['status'] = $status;
+                if($status == self::GOODS_STATUS_ONLINE){
+                    $mongoData['publishtime'] = time();
+                }
             }
+
             if($lon){
                 $mongoData['gps'] = array(
-                    'lon'=> $lon,
-                    'lat'=> $lat
+                    'lon'=> doubleval($lon),
+                    'lat'=> doubleval($lat)
                 );
             }
 
@@ -161,10 +173,6 @@ class Goods_model extends CI_Model{
             //插入失败
             return null;
         }
-
-
-
-
     }
 
 
@@ -208,15 +216,41 @@ class Goods_model extends CI_Model{
      * @param $userId
      * @return mixed
      */
-    function getAllGoodsByUser($userId,$status,$pageSize,$pageNo){
+    function getAllGoodsByUser($userId, $status, $get_time, $count, $op){
 
-        $sql = "SELECT * from ".$this->getTableName($userId)." where userid=".$userId;
-        if($status != 2 ){
-            $sql = $sql." and status=".$status;
+        $list = array();
+
+        switch($op){
+            case self::OP_MORE:
+
+                $listCursor = $this->goodsCol->find(
+                    array(
+                        "userid"=>"$userId",
+                        "status"=>intval($status),
+                        "publishtime" => array('$lt'=>$get_time)
+                    )
+                )->limit($count)->sort(
+                    array("publishtime" => -1)
+                );
+                break;
+            case self::OP_REFRESH:
+                $listCursor = $this->goodsCol->find(
+                    array(
+                        "userid"=>"$userId",
+                        "status"=>intval($status),
+                        "publishtime" => array('$gt'=>$get_time)
+                    )
+                )->limit($count)->sort(
+                    array("publishtime" => -1)
+                );
+                break;
         }
-        $sql = $sql." order by publishtime desc limit ".(($pageNo-1)*$pageSize).",". $pageSize;
-        $rs =  $this->db->query($sql)->result();
-        return $rs;
+
+        foreach ( $listCursor as $id => $value ){
+            $value["_id"] = $id;
+            $list[] = $value;
+        }
+        return $list;
     }
 
     /**
@@ -224,17 +258,40 @@ class Goods_model extends CI_Model{
      * @param $lon
      * @param $lat
      */
-    function getNearGoodsByLocal($lon,$lat,$pageSize,$pageNo,$status,$keyword){
+    function getNearGoodsByLocal($lon, $lat, $keyword, $get_time, $count, $op){
+
+        $list = array();
+
         $query =  array(
             'gps'=>array("\$near"=> array('lon'=>$lon,'lat'=>$lat))
         );
-        if($status != 2){
-            $query['status'] = $status;
-        }
+
+        $query['status'] = self::GOODS_STATUS_ONLINE;
         if($keyword != ""){
-            $query["desc"] = $keyword;
+            $query["title"] = new MongoRegex("/".$keyword."/i");
         }
-       return  $this->goodsCol->find($query)->skip(($pageNo-1)*$pageSize)->limit($pageSize);
+
+        switch($op){
+            case self::OP_MORE:
+                $query["publishtime"] = array('$lt'=>$get_time);
+
+                $listCursor = $this->goodsCol->find($query)->limit($count)->sort(
+                    array("publishtime" => -1)
+                );
+                break;
+            case self::OP_REFRESH:
+                $query["publishtime"] = array('$gt'=>$get_time);
+
+                $listCursor = $this->goodsCol->find($query)->limit($count)->sort(
+                    array("publishtime" => -1)
+                );
+                break;
+        }
+
+        foreach ( $listCursor as $id => $value ){
+            $list[] = $value;
+        }
+        return $list;
     }
     /**
      * 根据用户id获取表名

@@ -9,6 +9,7 @@
 class Goods extends MY_Controller{
 
     const MAX_PUBLISH_GOODS_NUM = 5;  //能免费发布最在商品数量
+    const DEFAULT_LIST_COUNT = 10;  //默认列表条数
 
      function __construct(){
         parent::__construct();
@@ -129,29 +130,48 @@ class Goods extends MY_Controller{
      * 包括根据地理位置获取和获取某人的商品列表
      */
     function getList(){
+
         $count = $this->input->get_post('count');
-        $page = $this->input->get_post('page');
+        if(empty($count))
+            $count = self::DEFAULT_LIST_COUNT;
+
+        $get_time = $this->input->get_post('get_time');
+        if(empty($get_time))
+            $get_time = time();
+
+        $op = $this->input->get_post('op');
+        if(empty($op))
+            $op = -1;  //默认显示更多
+
 
         $filter = $this->input->get_post('filter');
         $keyword = $this->input->get_post('keyword');
         $status = $this->input->get_post('status');
+        $lon = $this->input->get_post('lon');
+        $lat = $this->input->get_post('lat');
+
 
         if($filter=="2"){
+            //用户发布的商品
+
             $userId = $keyword;
-            $goodList = $this->Goods_model->getAllGoodsByUser($userId,(int)$status,(int)$count,(int)$page);
-            foreach($goodList as $row){
-                echo json_encode($row);
-                echo "<br/>";
+            $goodList = $this->Goods_model->getAllGoodsByUser($userId, $status, $get_time, $count, $op);
+
+            if(is_array($goodList)){
+                echo json_encode($goodList);
+            }else{
+                tkProcessError(30005);
             }
         }elseif($filter=="1"){
-            $lon = $this->input->get_post('lon');
-            $lat = $this->input->get_post('lat');
-            $near = $this->Goods_model->getNearGoodsByLocal((int)$lon,(int)$lat,(int)$count,(int)$page,(int)$status,$keyword);
-            while($near->hasNext()){
-                echo json_encode($near->getNext());
-                echo "<br/>";
-            }
+            //周边商品
 
+            $nearList = $this->Goods_model->getNearGoodsByLocal($lon, $lat, $keyword, $get_time, $count, $op);
+
+            if(is_array($nearList)){
+                echo json_encode($nearList);
+            }else{
+                tkProcessError(30005);
+            }
 
         }
     }
