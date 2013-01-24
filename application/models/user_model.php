@@ -260,7 +260,7 @@ class User_model extends CI_Model{
         }else{
             //第一次登录
         }
-        $ret['status'] = '1';
+        $ret['status'] = 1;
         $userCollection->insert($ret);
         return $token;
     }
@@ -272,10 +272,10 @@ class User_model extends CI_Model{
     function getOnlineStatus($uid){
     	$ret = array();
     	$userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
-    	$query = array('uid' => $uid);
+    	$query = array('uid' => (int)$uid);
     	$tmp = $userCollection->findOne($query);
     	if($tmp){
-    		return $tmp['status'];
+    		return (int)$tmp['status'];
     	}
     	return 0;
     }

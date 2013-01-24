@@ -134,11 +134,11 @@ class User extends MY_Controller{
 		if( $this->User_model->checkUidToken($uid, $token)){
 			//验证通过
 			if( 1 == $op ){
-				$newdata = array('$set' => array("status" => "1"));
-				$ret['status'] = "1";
+				$newdata = array('$set' => array("status" => 1));
+				$ret['status'] = 1;
 			}else{
-				$newdata = array('$set' => array("status" => "2"));
-				$ret['status'] = "2";
+				$newdata = array('$set' => array("status" => 2));
+				$ret['status'] = 2;
 			}
 			$this->userCollection->update(array('uid'=>$uid,'access_token'=>$token),$newdata);
 
