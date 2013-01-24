@@ -17,69 +17,56 @@ class Goods extends MY_Controller{
      * 发布商品
      */
     function publish(){
-        $userId = $this->input->get_post('userId');
+
+        parent::_validateToken();
+
+        $uid = $this->input->get_post('uid');
+        $goods_id = $this->input->get_post('goods_id');
         $title = $this->input->get_post('title');
         $desc  = $this->input->get_post('desc');
-        $price = $this->input->get_post('price');
+        $money = $this->input->get_post('money');
         $lon  = $this->input->get_post('lon');
         $lat = $this->input->get_post('lat');
+        $status = $this->input->get_post('status');
 
-        // TODO 验证参数
+        if(empty($money)) $money = 0; //免费商品
 
-        $goods = array(
-            "userId" => $userId,
-            "title" => $title,
-            "desc" => $desc,
-            "price"=> $price,
-            "lon"=>$lon,
-            "lat"=>$lat
-        );
-        $rt = $this->Goods_model->insertNewGoods($goods);
-        if($rt == 1){
-            echo "{'code':20000,'desc':'商品发布成功'}";
+        if(empty($goods_id)){
+
+            //判断用户在线商品数量，
+
+
+            //发布新商品
+            $goods_id = $this->Goods_model->insertNewGoods($uid, $title, $desc, $money, $lon, $lat);
+            if($goods_id){
+
+                //发布成功
+                $res = array(
+                    "uid" => $uid,
+                    "goods_id" => $goods_id
+                );
+                echo json_encode($res);
+            }else{
+               //发布失败
+               tkProcessError(30000);
+            }
+
         }else{
-            echo "{'code':10012,'desc':'商品发布错误'}";
+            //编辑商品
+            $rs = $this->Goods_model->updateGoods($uid, $goods_id, $title, $desc, $money, $lon, $lat, $status);
+            if($rs){
+                $res = array(
+                    "uid" => $uid,
+                    "goods_id" => $goods_id
+                );
+                echo json_encode($res);
+            }else{
+                //编辑失败
+                tkProcessError(30001);
+            }
         }
 
     }
-
-    /**
-     * 编辑商品
-     */
-    function edit(){
-
-        $userId = $this->input->get_post('userId');
-
-        $title = $this->input->get_post('title');
-
-        $desc = $this->input->get_post('desc');
-
-        $price = $this->input->get_post('price');
-
-        $lon = $this->input->get_post('lon');
-
-        $lat = $this->input->get_post('lat');
-
-        $goods = array(
-
-            "userId" => $userId,
-
-            "title" => $title,
-
-            "desc" => $desc,
-
-            "price"=> $price,
-
-            "lon"=>$lon,
-
-            "lat"=>$lat
-
-        );
-
-        $this->Goods_model->updateGoods($goods);
-
-    }
-
 
 
     /**

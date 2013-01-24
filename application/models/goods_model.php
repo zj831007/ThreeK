@@ -11,6 +11,9 @@ class Goods_model extends CI_Model{
     private $table_name_prefix = "goods0";
 
     const GOOD_COLLECTION = "goods";
+    const GOODS_STATUS_ONLINE = 1;
+    const GOODS_STATUS_OFFLINE = 0;
+
     function __construct(){
         parent::__construct();
         $this->goodsCol = $this->mongodb->selectCollection(self::GOOD_COLLECTION);
@@ -20,107 +23,147 @@ class Goods_model extends CI_Model{
      * 发布商品
      * @return mixed
      */
-    function insertNewGoods($goods){
-        $userId = $goods['userId'];
+    function insertNewGoods($uid, $title, $desc, $money, $lon, $lat){
 
-        $goodsId = "".$userId.time().rand(10000,99999);
+        if(empty($desc)) $desc = "";
+        if(empty($title)) $title = "";
 
-        $status = 0;
+        $goodsId = "".$uid.time().rand(10000,99999);
 
-        $publish_time = time();
-        $modify_time = $publish_time;
-
-        $goods['goodsid'] = $goodsId;
-        $goods['status'] = 0;
-        $goods['publishtime'] = $publish_time;
-        $goods['modifytime'] = $modify_time;
+        $status = self::GOODS_STATUS_ONLINE;
+        $publishtime = time();
 
         $mongoData = array(
             'goodsid' => $goodsId,
-            'title' => $goods['title'],
-            'desc' => $goods['desc'],
-            'userid' => $userId,
-            'price' => $goods['price'],
-            'publishtime'=>$publish_time,
-            'modifytime'=>$modify_time,
+            'title' => $title,
+            'desc' => $desc,
+            'userid' => $uid,
+            'price' => $money,
+            'publishtime'=> $publishtime,
             'gps' => array(
-                'lon'=> (double)$goods['lon'],
-                'lat'=> (double)$goods['lat']
+                'lon'=> $lon,
+                'lat'=> $lat
             ),
-            'status'=>$status
+            'status'=> $status
         );
-        $table_name = $this->getTableName($userId);
-        $insertRs = $this->db->insert($table_name,$goods);
-        $this->goodsCol->save($mongoData);
-        return $insertRs;
+        $table_name = $this->getTableName($uid);
+
+        $sql = "insert into ".$table_name.
+               "   set `title` =".$this->db->escape($title).
+               ", `desc`=".$this->db->escape($desc).
+               ", `price`=".$this->db->escape($money).
+               ", `lon`=".$this->db->escape($lon).
+               ", `lat`=".$this->db->escape($lat).
+               ", `goodsid`=".$this->db->escape($goodsId).
+               ", `userid`=".$this->db->escape($uid).
+               ", `publishtime`=".$this->db->escape($publishtime).
+               ", `status`=".$this->db->escape($status)."";
+        $this->db->query($sql);
+        if($this->db->affected_rows()){
+
+            //插入成功，mongodb操作
+            $this->goodsCol->save($mongoData);
+
+            return $goodsId;
+        }else{
+            //插入失败
+            return null;
+        }
     }
 
     /**
      *编辑商品
       */
-    function updateGoods($goods){
-
-        $userId = $goods['userId'];
-
-        $goodsId = $goods['goodsId'];
-
-        $title = $goods['title'];
-
-        $desc = $goods['desc'];
-
-        $price = $goods['price'];
-
-        $lon = $goods['lon'];
-
-        $lat = $goods['lat'];
-
-        $modify_time = time();
-
-        $table_name = $this->getTableName($userId);
+    function updateGoods($uid, $goods_id, $title, $desc, $money, $lon, $lat, $status){
 
 
+        $table_name = $this->getTableName($uid);
 
-        $sql = "UPDATE ".$table_name." set title ='".$title."',desc='".$desc."',price='".$price."',lon='".$lon."',lat='".$lat."',modifytime='".$modify_time."' where goodsid='".$goodsId."'";
+        $sql = "UPDATE $table_name ";
+        $SET = "SET";
+        $COMMA = "";
+        if( false !== $title){
+            $title = $this->db->escape($title);
+            $sql .= "$COMMA$SET `title` = $title ";
+            $SET = "";
+            $COMMA = ",";
+        }
 
+        if( false !== $desc){
+            $desc = $this->db->escape($desc);
+            $sql .= "$COMMA$SET `desc` = $desc ";
+            $SET = "";
+            $COMMA = ",";
+        }
 
+        if( false !== $money){
+            $money = $this->db->escape($money);
+            $sql .= "$COMMA$SET `price` = $money ";
+            $SET = "";
+            $COMMA = ",";
+        }
 
+        if( false !== $lon){
+            $lon = $this->db->escape($lon);
+            $sql .= "$COMMA$SET `lon` = $lon ";
+            $SET = "";
+            $COMMA = ",";
+        }
+
+        if( false !== $lat){
+            $lat = $this->db->escape($lat);
+            $sql .= "$COMMA$SET `lat` = $lat ";
+            $SET = "";
+            $COMMA = ",";
+        }
+
+        if( false !== $status){
+            $status = $this->db->escape($status);
+            $sql .= "$COMMA$SET `status` = $status ";
+            $SET = "";
+            $COMMA = ",";
+        }
+
+        $sql .= " WHERE `goodsid` = $goods_id";
         $this->db->query($sql);
+        if($this->db->affected_rows()){
 
-        $mongoData = $this->goodsCol->findOne(array(
+            //更新成功，更新mongodb
+            $mongoData = $this->goodsCol->findOne(array(
+                'goodsid'=>$goods_id
+            ));
+            if($title){
+                $mongoData['title'] = $title;
+            }
+            if($desc){
+                $mongoData['desc'] = $desc;
+            }
+            if($uid){
+                $mongoData['userid'] = $uid;
+            }
+            if($money){
+                $mongoData['price'] = $money;
+            }
+            if($status){
+                $mongoData['status'] = $status;
+            }
+            if($lon){
+                $mongoData['gps'] = array(
+                    'lon'=> $lon,
+                    'lat'=> $lat
+                );
+            }
 
-            'goodsid'=>$goodsId
+            $mongoData = $this->goodsCol->save($mongoData);
 
-        ));
+            return true;
+        }else{
+            //插入失败
+            return null;
+        }
 
-        $mongoData = array(
 
-            'goodsid' => $goodsId,
 
-            'title' => $goods['title'],
-
-            'desc' => $goods['desc'],
-
-            'userid' => $userId,
-
-            'price' => $goods['price'],
-
-            'modifytime'=>$modify_time,
-
-            'gps' => array(
-
-                'lon'=> (double)$goods['lon'],
-
-                'lat'=> (double)$goods['lat']
-
-            ),
-
-            'status'=>$status
-
-        );
-
-        $mongoData = $this->goodsCol->save($mongoData);
-
-        $this->goodsCol->save();
 
     }
 

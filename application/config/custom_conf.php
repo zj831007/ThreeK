@@ -42,14 +42,6 @@ $config['error_def'] = array(
         "error_code"=>"10006",
         "error_desc"=>"Username has existed",
     ),
-    "20001" => array(
-        "error_code"=>"20001",
-        "error_desc"=>"Can’t create image upload path",
-    ),
-    "20002" => array(
-        "error_code"=>"20002",
-        "error_desc"=>"Upload img error",
-    ),
     "10009" => array(
     		"error_code"=>"10009",
     		"error_desc"=>"Username is not a correct pattern",
@@ -61,6 +53,23 @@ $config['error_def'] = array(
     "10011" => array(
     		"error_code"=>"10010",
     		"error_desc"=>"the Username is not allowed",
+    ),
+    "20001" => array(
+        "error_code"=>"20001",
+        "error_desc"=>"Can’t create image upload path",
+    ),
+    "20002" => array(
+        "error_code"=>"20002",
+        "error_desc"=>"Upload img error",
+    ),
+
+    "30000" => array(
+        "error_code"=>"30000",
+        "error_desc"=>"发布商品失败",
+    ),
+    "30001" => array(
+        "error_code"=>"30001",
+        "error_desc"=>"编辑商品失败",
     ),
 );
 
