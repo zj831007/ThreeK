@@ -50,7 +50,7 @@ class User extends MY_Controller{
         }
         if( 0 === preg_match('/^[a-zA-Z0-9_]{6,18}$/',$password) ){
         	
-//tkProcessError("10010");
+            tkProcessError("10010");
         }
     }
     /**
