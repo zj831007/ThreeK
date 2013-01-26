@@ -67,7 +67,7 @@
 <body>
 
 <div id="container">
-	<form method="post" enctype="multipart/form-data" action="http://localhost/threek/index.php/img/upload">
+	<form method="post" enctype="multipart/form-data" action="img/upload">
         <table>
             <tr>
                 <td>uid</td>
