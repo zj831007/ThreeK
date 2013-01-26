@@ -315,7 +315,6 @@ class Goods_model extends CI_Model{
         $query = $this->db->query($sql);
         if( $query->num_rows() > 0 ){
             $r = current($query->result_array());
-            var_dump($r);
             return $r;
         }else{
             return null;
