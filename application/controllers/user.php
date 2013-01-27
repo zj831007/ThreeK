@@ -10,6 +10,8 @@
  */
 class User extends MY_Controller{
 	
+    const USER_COLLECTTION = 'user';
+
     function __construct(){
 
         parent::__construct();
@@ -118,7 +120,7 @@ class User extends MY_Controller{
 		$uid = $this->input->get_post("uid");
 		$token = $this->input->get_post("access_token");
 		$userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
-		$userCollection->remove( array("uid" => $uid, "access_token"=> $token));
+		$userCollection->remove( array("uid" => intval($uid), "access_token"=> $token));
 		//操作成功：
         tkProcessError("88888");
 	}
