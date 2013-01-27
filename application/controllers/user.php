@@ -119,7 +119,8 @@ class User extends MY_Controller{
 		$token = $this->input->get_post("access_token");
 		$userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
 		$userCollection->remove( array("uid" => $uid, "access_token"=> $token));
-		echo json_encode(array());
+		//操作成功：
+        tkProcessError("88888");
 	}
 
 	/**
