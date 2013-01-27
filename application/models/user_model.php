@@ -233,6 +233,7 @@ class User_model extends CI_Model{
         $userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
         $query = array('uid' => (int)$uid,'access_token' => $token);
         $tmp = $userCollection->findOne($query);
+
         if($tmp){
             //验证通过
             return true;
