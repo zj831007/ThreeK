@@ -11,12 +11,15 @@
 class User extends MY_Controller{
 	
     const USER_COLLECTTION = 'user';
+    private $userCollection = null;
 
     function __construct(){
 
         parent::__construct();
         $this->load->model('User_model');
         $this->load->model('Goods_model');
+        
+        $this->userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
 
     }
     
@@ -144,7 +147,7 @@ class User extends MY_Controller{
 				$newdata = array('$set' => array("status" => 2));
 				$ret['status'] = 2;
 			}
-			$this->userCollection->update(array('uid'=>$uid,'access_token'=>$token),$newdata);
+			$this->userCollection->update(array('uid'=>intval($uid),'access_token'=>$token),$newdata);
 
             //操作成功：
             tkProcessError("88888");
