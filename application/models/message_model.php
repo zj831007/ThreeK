@@ -228,6 +228,6 @@ class Message_model extends CI_Model{
             if(!empty($value["news"]))
                 $totalNews += $value["news"];
         }
-        echo $totalNews;
+        return $totalNews;
     }
 }
