@@ -255,14 +255,17 @@ class User_model extends CI_Model{
         $token = md5($uid.time().uniqid(mt_rand(10000,99999)));
         $ret['access_token'] = $token;
 
-        $userCollection->save(
-            array("uid" => $ret['uid']),
-            array(
-                '$set' => array("status" => 1, "access_token"=>$token)
-            )
-        );
+        $tmp = $userCollection->findOne(array("uid" => $ret['uid']));
 
 
+        if($tmp){
+            //登录过
+            $userCollection->remove(array("uid" => $ret['uid']));
+        }else{
+            //第一次登录
+        }
+        $ret['status'] = 1;
+        $userCollection->insert($ret);
         return $token;
     }
     /**
