@@ -76,7 +76,7 @@ class User extends MY_Controller{
 
             //注册成功，返回token,uid
         	$info['access_token'] = $token;
-        	$info['uid'] = $ret['uid'];
+        	$info['uid'] = intval($ret['uid']);
 
             echo json_encode($info);
         }else{
