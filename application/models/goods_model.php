@@ -289,6 +289,7 @@ class Goods_model extends CI_Model{
         }
 
         foreach ( $listCursor as $id => $value ){
+            $value["_id"] = $id;
             $list[] = $value;
         }
         return $list;
