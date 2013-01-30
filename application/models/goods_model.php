@@ -329,9 +329,22 @@ class Goods_model extends CI_Model{
      * @param $small_pic
      */
     function replaceGoodsPic($goods_id, $pic, $small_pic){
+        $old_goods_id = $goods_id;
         $goods_id = $this->db->escape($goods_id);
         $sql = "replace into goods_pic set bigpic='".$pic."', smallpic='".$small_pic."', goodsid=".$goods_id;
         $this->db->query($sql);
+
+        $affectCount = $this->db->affected_rows();
+        if($affectCount){
+            //更新成功，更新mongodb
+
+            $img_upload_base_path = $this->config->item("img_upload_base_path");
+            $this->goodsCol->update(
+                array("goodsid" => $old_goods_id),
+                array('$set' => array("bpic" => $img_upload_base_path.$pic, "spic" => $img_upload_base_path.$small_pic))
+            );
+
+        }
     }
     
     /**

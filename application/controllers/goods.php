@@ -91,8 +91,8 @@ class Goods extends MY_Controller{
                 "price" => $goodsInfo["price"],
                 "publishtime" => $goodsInfo["publishtime"],
                 "status" => $goodsInfo["status"],
-                "goodsid" => $goodsInfo["goodsid"],
-                "goodsid" => $goodsInfo["goodsid"],
+                "bpic" => $goodsInfo["bpic"],
+                "spic" => $goodsInfo["spic"],
             );
             $gps = $goodsInfo["gps"];
             if(is_array($gps)){
