@@ -75,6 +75,10 @@ $config['error_def'] = array(
         "error_code"=>"20002",
         "error_desc"=>"Upload img error",
     ),
+    "20003" => array(
+        "error_code"=>"20003",
+        "error_desc"=>"Image can not be nil",
+    ),
 
     "30000" => array(
         "error_code"=>"30000",
