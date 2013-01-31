@@ -79,6 +79,10 @@ $config['error_def'] = array(
         "error_code"=>"20003",
         "error_desc"=>"Image can not be nil",
     ),
+    "20004" => array(
+        "error_code"=>"20004",
+        "error_desc"=>"Image upload type is not correct",
+    ),
 
     "30000" => array(
         "error_code"=>"30000",
@@ -104,7 +108,10 @@ $config['error_def'] = array(
         "error_code"=>"30005",
         "error_desc"=>"Search goods list error",
     ),
-
+    "30006" => array(
+        "error_code"=>"30006",
+        "error_desc"=>"Goods id is not existed",
+    ),
 );
 
 
