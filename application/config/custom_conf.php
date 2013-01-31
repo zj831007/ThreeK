@@ -42,6 +42,14 @@ $config['error_def'] = array(
         "error_code"=>"10006",
         "error_desc"=>"Username has existed",
     ),
+    "10007" => array(
+        "error_code"=>"10007",
+        "error_desc"=>"Username can not include senswords",
+    ),
+    "10008" => array(
+        "error_code"=>"10008",
+        "error_desc"=>"Username can not be phone no.",
+    ),
     "10009" => array(
     		"error_code"=>"10009",
     		"error_desc"=>"Username is not a correct pattern",
@@ -54,6 +62,11 @@ $config['error_def'] = array(
     		"error_code"=>"10010",
     		"error_desc"=>"the Username is not allowed",
     ),
+    "10012" => array(
+        "error_code"=>"10012",
+        "error_desc"=>"the uid is not existed",
+    ),
+
     "20001" => array(
         "error_code"=>"20001",
         "error_desc"=>"Can’t create image upload path",
