@@ -112,6 +112,19 @@ $config['error_def'] = array(
         "error_code"=>"30006",
         "error_desc"=>"Goods id is not existed",
     ),
+    "40000" => array(
+        "error_code"=>"40000",
+        "error_desc"=>"Goods comment is is not existed",
+    ),
+    "50000" => array(
+        "error_code"=>"50000",
+        "error_desc"=>"Sender uid or reveiver uid is not existed",
+    ),
+    "50001" => array(
+        "error_code"=>"50001",
+        "error_desc"=>"Could not send message to self",
+    ),
+
 );
 
 
