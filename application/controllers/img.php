@@ -38,11 +38,7 @@ class Img extends MY_Controller{
             tkProcessError("20004");
         }
 
-        if(empty($_POST["img"])){
-            tkProcessError("20003");
-        }
-
-
+        
 
         $img_path = $this->Img_model->checkUploadPath($uid, $type, $ext);
         if(empty($img_path)){
