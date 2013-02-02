@@ -29,6 +29,13 @@ class Message extends MY_Controller{
         $to_uid = $this->input->get_post("to_uid");
         $content = $this->input->get_post("content");
 
+        parent::_validateUID($from_uid);
+        parent::_validateUID($to_uid);
+
+        if($from_uid == $to_uid){
+            tkProcessError("50001");
+        }
+
 
         $this->Message_model->insert($from_uid, $to_uid, $content);
 

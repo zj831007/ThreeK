@@ -13,7 +13,7 @@ abstract class MY_Controller extends CI_Controller {
         parent::__construct();
         $this->load->helper("commonfun");
         $this->load->model('User_model');
-
+        $this->load->model('Goods_model');
         // CLog::debug($_SERVER['']);
 
     }
@@ -24,6 +24,9 @@ abstract class MY_Controller extends CI_Controller {
         die('error');
     }
 
+    /**
+     * token校验
+     */
     protected  function  _validateToken(){
 
         $uid = $this->input->get_post('uid');
@@ -35,6 +38,27 @@ abstract class MY_Controller extends CI_Controller {
         }
 
     }
+
+    /**
+     * UID校验
+     */
+    protected  function _validateUID($uid){
+        if(! $this->User_model->getUserInfo($uid)){
+            //uid不存在
+            tkProcessError("10012");
+        }
+    }
+
+    /**
+     * Goods ID校验
+     */
+    protected function  _validateGoodsID($goods_id){
+        if(! $this->Goods_model->getGoodDetail($goods_id)){
+            //goodsid不存在
+            tkProcessError("30006");
+        }
+    }
+
 }
 
 // END MY_Controller Class

@@ -9,7 +9,8 @@
  * To change this template use File | Settings | File Templates.
  */
 class Img extends MY_Controller{
-
+    const UPTYPE_AVATAR = "1";  //个人头像
+    const UPTYPE_GOODSPIC = "2"; //商品图片
 
     function __construct(){
 
@@ -23,16 +24,32 @@ class Img extends MY_Controller{
      */
     public function upload(){
 
-        parent::_validateToken();
+        //parent::_validateToken();
 
         $uid = $this->input->get_post("uid");
         $ext = $this->input->get_post("ext");
         $type = $this->input->get_post("type");
 
+        if($type == self::UPTYPE_GOODSPIC){
+            parent::_validateGoodsID($ext);
+        }
+
+        if($type != self::UPTYPE_AVATAR && $type != self::UPTYPE_GOODSPIC){
+            tkProcessError("20004");
+        }
+
+        if(empty($_POST["img"])){
+            tkProcessError("20003");
+        }
+
+
+
         $img_path = $this->Img_model->checkUploadPath($uid, $type, $ext);
         if(empty($img_path)){
             tkProcessError("20001");
         }
+
+
 
         $config['upload_path'] = $img_path;
         $config['allowed_types'] = 'jpg|png';
