@@ -34,7 +34,7 @@ class User extends MY_Controller{
             tkProcessError("10002");
         }
         if( 0 !== preg_match('/^1[0-9]{10}$/',$username) ){
-        	tkProcessError("10003");
+        	tkProcessError("10008");
         }
         if( 0 === preg_match('/^[a-zA-Z0-9_@\.]{4,20}$/',$username) ){
         	tkProcessError("10009");
