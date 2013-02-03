@@ -57,6 +57,23 @@ class User_model extends CI_Model{
     }
     
     /**
+     * 是否存在指定UID
+     * @param $uid
+     * @return boolean
+     */
+    function isExistUid($uid){
+    	$uid = intval($uid);
+    	$uid = $this->db->escape($uid);
+    	$table = $this->_getTable($uid);
+    	$sql = "SELECT `userid` FROM `$table` where `userid` = $uid limit 1";
+    	$query = $this->db->query($sql);
+    	if ($query->num_rows() > 0){
+    		return true;
+    	}else{
+    		return false;
+    	}
+    }
+    /**
      * 注册新用户
      * @param $username
      * @param $password

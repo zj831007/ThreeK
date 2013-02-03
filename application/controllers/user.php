@@ -118,6 +118,15 @@ class User extends MY_Controller{
 		$uid = $this->input->get_post("uid");
 		$token = $this->input->get_post("access_token");
 		$userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
+		
+		if( ! $this->User_model->isExistUid($uid) ){
+			tkProcessError("10012");
+		}
+		$query = array("uid" => intval($uid), "access_token"=> $token);
+		$tmp = $userCollection->findOne($query);
+		if( !$tmp ){
+			tkProcessError("10005");
+		}
 		$userCollection->remove( array("uid" => intval($uid), "access_token"=> $token));
 		//操作成功：
         tkProcessError("88888");
