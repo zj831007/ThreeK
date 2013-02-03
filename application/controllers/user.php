@@ -22,12 +22,6 @@ class User extends MY_Controller{
         $this->userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
 
     }
-    
-    static $forbiddenWords = array(
-    				"lihongming",
-    				"admin",
-    				"zhubajie",
-    		);
 
     /**
      * 用户名密码校验
@@ -45,8 +39,9 @@ class User extends MY_Controller{
         if( 0 === preg_match('/^[a-zA-Z0-9_@\.]{4,20}$/',$username) ){
         	tkProcessError("10009");
         }
-        foreach(User::$forbiddenWords as $words){
-        	if( stristr($username,$words) ){
+        $forbiddenWords = $this->User_model->getSensWords();
+        foreach($forbiddenWords as $words){
+        	if( stristr($username,$words['sensword']) ){
         		tkProcessError("10011");
         	}
         }

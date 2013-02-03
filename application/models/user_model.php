@@ -31,6 +31,32 @@ class User_model extends CI_Model{
     const USER_REG_FAIL = 2;
     
     /**
+     * 敏感词判断
+     * @param word
+     * @return boolean 
+     */
+    function isSensword($word){
+    	$word = $this->db->escape($word);
+    	$sql = "SELECT `id` FROM  `senswords` WHERE `sensword` like '*$word*'";
+    	$query = $this->db->query($sql);
+    	if ($query->num_rows() > 0){
+    		return true;
+    	}else{
+    		return false;
+    	}
+    }
+    
+    /**
+     * 敏感词列表
+     * 
+     */
+    function getSensWords(){
+    	$sql = "SELECT `sensword` FROM `senswords`";
+    	$query = $this->db->query($sql);
+    	return $query->result_array();
+    }
+    
+    /**
      * 注册新用户
      * @param $username
      * @param $password
