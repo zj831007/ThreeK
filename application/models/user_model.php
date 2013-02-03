@@ -47,6 +47,20 @@ class User_model extends CI_Model{
     }
     
     /**
+     * 是否存在敏感词
+     * @param $text
+     * @return boolean
+     */
+    function isContainSensWord($text){
+    	$forbiddenWords = $this->getSensWords();
+    	foreach($forbiddenWords as $words){
+    		if( stristr($text,$words['sensword']) ){
+    			return true;
+    		}
+    	}
+    	return false;
+    }    
+    /**
      * 敏感词列表
      * 
      */

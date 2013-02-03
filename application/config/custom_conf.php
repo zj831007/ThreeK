@@ -66,6 +66,10 @@ $config['error_def'] = array(
         "error_code"=>"10012",
         "error_desc"=>"the uid is not existed",
     ),
+    "10013" => array(
+    		"error_code"=>"10013",
+    		"error_desc"=>"Desc can not include senswords",
+    ),
 
     "20001" => array(
         "error_code"=>"20001",

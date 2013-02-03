@@ -196,6 +196,13 @@ class User extends MY_Controller{
 		$email = $this->input->get_post('email');
 		$nickname = $this->input->get_post('nickname');
 
+		if($this->User_model->isContainSensWord($nickname)){
+			tkProcessError("10007");
+		}
+		if($this->User_model->isContainSensWord($desc)){
+			tkProcessError("10013");
+		}
+		
         $push_token = $this->input->get_post("push_token"); //IOS push用
 
 
