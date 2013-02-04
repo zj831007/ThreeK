@@ -12,7 +12,6 @@
 class User_model extends CI_Model{
 
     const USER_COLLECTTION = 'user';
-    private $userCollection = null;
 
     function __construct(){
         parent::__construct();
@@ -287,9 +286,8 @@ class User_model extends CI_Model{
      * @return boolean
      */
      function checkUidToken($uid,$token){
-        $userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
         $query = array('uid' => (int)$uid,'access_token' => $token);
-        $tmp = $userCollection->findOne($query);
+        $tmp = $this->userCollection->findOne($query);
 
         if($tmp){
             //验证通过
@@ -307,22 +305,21 @@ class User_model extends CI_Model{
      */
      function genToken($uid){
         $ret = array();
-        $userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
         $ret['uid'] = intval($uid);
         $token = md5($uid.time().uniqid(mt_rand(10000,99999)));
         $ret['access_token'] = $token;
 
-        $tmp = $userCollection->findOne(array("uid" => $ret['uid']));
+        $tmp = $this->userCollection->findOne(array("uid" => $ret['uid']));
 
 
         if($tmp){
             //登录过
-            $userCollection->remove(array("uid" => $ret['uid']));
+            $this->userCollection->remove(array("uid" => $ret['uid']));
         }else{
             //第一次登录
         }
         $ret['status'] = 1;
-        $userCollection->insert($ret);
+         $this->userCollection->insert($ret);
         return $token;
     }
     /**
@@ -332,9 +329,8 @@ class User_model extends CI_Model{
      */
     function getOnlineStatus($uid){
     	$ret = array();
-    	$userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
     	$query = array('uid' => (int)$uid);
-    	$tmp = $userCollection->findOne($query);
+    	$tmp = $this->userCollection->findOne($query);
     	if($tmp){
     		return (int)$tmp['status'];
     	}
@@ -347,14 +343,40 @@ class User_model extends CI_Model{
      * @param $value value
      */
     function setUserMongoKV($uid,$key,$value){
-    	$userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
-    	$query = array('uid' => (int)$uid);
+
     	$newdata = array('$set' => array("$key" => $value));
-    	$tmp = $userCollection->update(array('uid'=>(int)$uid),$newdata);
+    	$tmp = $this->userCollection->update(array('uid'=>(int)$uid),$newdata);
     	if($tmp && 1 == $tmp['ok'] ){
     		return $tmp['ok'];
     	}else{
     		return 0;
     	}
     }
+
+    /**
+     * 更新用户在线状态
+     * @param $uid
+     * @param $token
+     * @param $op
+     */
+    function updateOnlineStatus($uid, $token, $op){
+        if( 1 == $op ){
+            $newdata = array('$set' => array("status" => 1));
+            $ret['status'] = 1;
+        }else{
+            $newdata = array('$set' => array("status" => 2));
+            $ret['status'] = 2;
+        }
+        $this->userCollection->update(array('uid'=>intval($uid),'access_token'=>$token),$newdata);
+    }
+
+    /**
+     * 删除token
+     * @param $uid
+     * @param $token
+     */
+    function removeToken($uid, $token){
+        $this->userCollection->remove( array("uid" => intval($uid), "access_token"=> $token));
+    }
+
 }

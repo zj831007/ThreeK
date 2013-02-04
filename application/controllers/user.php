@@ -10,17 +10,12 @@
  */
 class User extends MY_Controller{
 	
-    const USER_COLLECTTION = 'user';
-    private $userCollection = null;
 
     function __construct(){
 
         parent::__construct();
         $this->load->model('User_model');
         $this->load->model('Goods_model');
-        
-        $this->userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
-
     }
 
     /**
@@ -29,7 +24,9 @@ class User extends MY_Controller{
      * @param $password
      */
     private function _validate($username, $password){
-        //TODO
+
+        parent::_valideateSenswords($username);
+
         if(empty($username)){
             tkProcessError("10002");
         }
@@ -39,12 +36,7 @@ class User extends MY_Controller{
         if( 0 === preg_match('/^[a-zA-Z0-9_@\.]{4,20}$/',$username) ){
         	tkProcessError("10009");
         }
-        $forbiddenWords = $this->User_model->getSensWords();
-        foreach($forbiddenWords as $words){
-        	if( stristr($username,$words['sensword']) ){
-        		tkProcessError("10011");
-        	}
-        }
+
         if(empty($password)){
             tkProcessError("10004");
         }
@@ -92,13 +84,8 @@ class User extends MY_Controller{
 		$username = $this->input->get_post("account");
 		$password = $this->input->get_post("password");
 
-
-
 		$userInfo = $this->User_model->checkUserPasswd($username,$password);
 		if($userInfo){
-            //TODO 保存push_token
-
-
 			//login_success
 			$token = $this->User_model->genToken($userInfo['id']);
             $info['access_token'] = $token;
@@ -117,17 +104,12 @@ class User extends MY_Controller{
 	public function logout(){
 		$uid = $this->input->get_post("uid");
 		$token = $this->input->get_post("access_token");
-		$userCollection = $this->mongodb->selectCollection(self::USER_COLLECTTION);
-		
-		if( ! $this->User_model->isExistUid($uid) ){
-			tkProcessError("10012");
-		}
-		$query = array("uid" => intval($uid), "access_token"=> $token);
-		$tmp = $userCollection->findOne($query);
-		if( !$tmp ){
-			tkProcessError("10005");
-		}
-		$userCollection->remove( array("uid" => intval($uid), "access_token"=> $token));
+
+		parent::_validateUID($uid);
+        parent::_validateToken();
+
+
+        $this->User_model->removeToken($uid, $token);
 		//操作成功：
         tkProcessError("88888");
 	}
@@ -141,24 +123,15 @@ class User extends MY_Controller{
 		$uid = $this->input->get_post("uid");
 		$token = $this->input->get_post("access_token");
 		$op = $this->input->get_post("op");
-		
-		if( $this->User_model->checkUidToken($uid, $token)){
-			//验证通过
-			if( 1 == $op ){
-				$newdata = array('$set' => array("status" => 1));
-				$ret['status'] = 1;
-			}else{
-				$newdata = array('$set' => array("status" => 2));
-				$ret['status'] = 2;
-			}
-			$this->userCollection->update(array('uid'=>intval($uid),'access_token'=>$token),$newdata);
 
-            //操作成功：
-            tkProcessError("88888");
-        }else{
-			//操作失败,登录过期
-            tkProcessError("10005");
-		}
+        parent::_validateUID($uid);
+        parent::_validateToken();
+
+
+        $this->User_model->updateOnlineStatus($uid, $token, $op);
+
+        //操作成功：
+        tkProcessError("88888");
 
 	}
 
@@ -168,8 +141,11 @@ class User extends MY_Controller{
 	 */
 	public function profile(){
 		$uid = $this->input->get_post("uid");
+
+        parent::_validateUID($uid);
+
 		$profile = $this->User_model->getUserInfo($uid);
-        //TODO 个人信息不全：｛avatar, nickname, intro, sex, goods_count, online｝
+
 		$result = array();
 		if($profile){
 			$result['avatar'] = $profile['icon'];
@@ -196,27 +172,26 @@ class User extends MY_Controller{
 		$email = $this->input->get_post('email');
 		$nickname = $this->input->get_post('nickname');
 
-		if($this->User_model->isContainSensWord($nickname)){
-			tkProcessError("10007");
-		}
-		if($this->User_model->isContainSensWord($desc)){
-			tkProcessError("10013");
-		}
-		
+        parent::_validateUID($uid);
+        parent::_validateToken();
+
+        if(!empty($nickname)){
+            parent::_valideateSenswords($nickname);
+        }
+        if(!empty($desc)){
+            parent::_valideateSenswords($desc);
+        }
+
+
         $push_token = $this->input->get_post("push_token"); //IOS push用
 
+        //验证成功
+        $ret = $this->User_model->updateUserInfo($uid,"","",$gender,$desc,$tel,$email,$nickname);
+        if( $push_token ){
+            $this->User_model->setUserMongoKV($uid,"push_token",$push_token);
+        }
+        //操作成功：
+        tkProcessError("88888");
 
-		if( $this->User_model->checkUidToken($uid, $token)){
-			//验证成功
-            $ret = $this->User_model->updateUserInfo($uid,"","",$gender,$desc,$tel,$email,$nickname);
-            if( $push_token ){
-            	$this->User_model->setUserMongoKV($uid,"push_token",$push_token);
-            }
-            //操作成功：
-            tkProcessError("88888");
-		}else{
-            //操作失败,登录过期
-            tkProcessError("10005");
-		}
 	}
 }

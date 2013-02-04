@@ -7,6 +7,7 @@
  * 30000—商品相关
  * 40000—商品咨询相关
  * 50000—私信相关
+ *
  */
 $config['error_def'] = array(
 
@@ -18,6 +19,12 @@ $config['error_def'] = array(
         "error_code"=>"99999",
         "error_desc"=>"Unknown error",
     ),
+    "99998" => array(
+        "error_code"=>"99998",
+        "error_desc"=>"Can not contain senswords",
+    ),
+
+
     "10001" => array(
         "error_code"=>"10001",
         "error_desc"=>"Username or password is wrong",
@@ -42,10 +49,7 @@ $config['error_def'] = array(
         "error_code"=>"10006",
         "error_desc"=>"Username has existed",
     ),
-    "10007" => array(
-        "error_code"=>"10007",
-        "error_desc"=>"Username can not include senswords",
-    ),
+
     "10008" => array(
         "error_code"=>"10008",
         "error_desc"=>"Username can not be phone no.",
@@ -65,10 +69,6 @@ $config['error_def'] = array(
     "10012" => array(
         "error_code"=>"10012",
         "error_desc"=>"the uid is not existed",
-    ),
-    "10013" => array(
-    		"error_code"=>"10013",
-    		"error_desc"=>"Desc can not include senswords",
     ),
 
     "20001" => array(
