@@ -58,6 +58,9 @@ class Goods extends MY_Controller{
             }
 
         }else{
+            //检验goods id
+            parent::_validateGoodsID($goods_id);
+
             //编辑商品
             $rs = $this->Goods_model->updateGoods($uid, $goods_id, $title, $desc, $money, $lon, $lat, $status);
             if($rs){
@@ -80,6 +83,9 @@ class Goods extends MY_Controller{
      */
     function detail(){
         $goods_id = $this->input->get_post('goods_id');
+
+        parent::_validateGoodsID($goods_id);
+
         $goodsInfo = $this->Goods_model->getGoodDetail($goods_id);
         if($goodsInfo){
 
@@ -110,10 +116,13 @@ class Goods extends MY_Controller{
      * 下架商品
      */
     function offline(){
-        parent::_validateToken();
 
         $uid = $this->input->get_post('uid');
         $goodsId = $this->input->get_post('goods_id');
+
+        parent::_validateToken();
+        parent::_validateGoodsID($goodsId);
+
         $rs =  $this->Goods_model->offlineGoods($goodsId,$uid);
 
         if($rs){

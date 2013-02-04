@@ -21,6 +21,9 @@ class Comment extends MY_Controller{
      */
     function getList(){
         $goods_id = $this->input->get_post('goods_id');
+
+        parent::_validateGoodsID($goods_id);
+
         $count = $this->input->get_post('count');
         if(empty($count))
             $count = self::DEFAULT_LIST_COUNT; //默认10条
@@ -43,10 +46,12 @@ class Comment extends MY_Controller{
      * 回复咨询
      */
     function reply(){
-        parent::_validateToken();
 
         $c_id = $this->input->get_post('c_id');
         $answer = $this->input->get_post('answer');
+
+        parent::_validateToken();
+
 
         $this->Comment_model->insertReply($c_id, $answer);
 
@@ -58,12 +63,12 @@ class Comment extends MY_Controller{
      * 咨询
      */
     function post(){
-        parent::_validateToken();
-
         $goods_id = $this->input->get_post("goods_id");
         $uid = $this->input->get_post("uid");
         $question = $this->input->get_post("question");
 
+        parent::_validateToken();
+        parent::_validateGoodsID($goods_id);
 
         $this->Comment_model->insert($uid, $goods_id, $question);
         //操作成功：
