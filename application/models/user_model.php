@@ -29,46 +29,8 @@ class User_model extends CI_Model{
     const USER_EXISTS = 1;
     const USER_REG_FAIL = 2;
     
-    /**
-     * 敏感词判断
-     * @param word
-     * @return boolean 
-     */
-    function isSensword($word){
-    	$word = $this->db->escape($word);
-    	$sql = "SELECT `id` FROM  `senswords` WHERE `sensword` like '*$word*'";
-    	$query = $this->db->query($sql);
-    	if ($query->num_rows() > 0){
-    		return true;
-    	}else{
-    		return false;
-    	}
-    }
-    
-    /**
-     * 是否存在敏感词
-     * @param $text
-     * @return boolean
-     */
-    function isContainSensWord($text){
-    	$forbiddenWords = $this->getSensWords();
-    	foreach($forbiddenWords as $words){
-    		if( stristr($text,$words['sensword']) ){
-    			return true;
-    		}
-    	}
-    	return false;
-    }    
-    /**
-     * 敏感词列表
-     * 
-     */
-    function getSensWords(){
-    	$sql = "SELECT `sensword` FROM `senswords`";
-    	$query = $this->db->query($sql);
-    	return $query->result_array();
-    }
-    
+
+
     /**
      * 是否存在指定UID
      * @param $uid

@@ -20,7 +20,7 @@ class Senswords_model extends CI_Model{
     }
 
     /**
-     * 查找敏感词
+     * 查找敏感词  for mongodb
      * @param $word
      */
     public function includeSenswords($word){
@@ -34,5 +34,23 @@ class Senswords_model extends CI_Model{
         }
 
     }
+
+
+    /**
+     * 敏感词判断  for db
+     * @param word
+     * @return boolean
+     */
+    function isSensword($word){
+        $word = $this->db->escape($word);
+        $sql = "SELECT `id` FROM  `senswords` WHERE `sensword` like '*$word*'";
+        $query = $this->db->query($sql);
+        if ($query->num_rows() > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
 }
