@@ -15,6 +15,7 @@ abstract class MY_Controller extends CI_Controller {
         $this->load->model('User_model');
         $this->load->model('Goods_model');
         $this->load->model('Senswords_model');
+        $this->load->model('Comment_model');
         // CLog::debug($_SERVER['']);
 
     }
@@ -67,6 +68,17 @@ abstract class MY_Controller extends CI_Controller {
         if($this->Senswords_model->includeSenswords($word)){
             //包含敏感词
             tkProcessError("99998");
+        }
+    }
+
+    /**
+     * 咨询校验
+     * @param $commentid
+     */
+    protected function _validateComment($commentid){
+        if(! $this->Comment_model->getComment($commentid)){
+            //goodsid不存在
+            tkProcessError("40000");
         }
     }
 

@@ -76,6 +76,19 @@ class Comment_model extends CI_Model{
     }
 
     /**
+     * 取得咨询信息
+     * @param $cud
+     * @return mixed
+     */
+    function getComment($comment_id){
+        $comment = $this->commentCol->findOne(array(
+            array("_id" => new MongoId($comment_id))
+        ));
+        return $comment;
+    }
+
+
+    /**
      * 获取咨询列表
      * @param $goods_id
      * @param $op

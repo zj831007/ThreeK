@@ -187,13 +187,16 @@ class User_model extends CI_Model{
       */
      function getUserInfo($uuid){
      	$uuid = (int)$uuid;
+        if($uuid < 0){
+            $uuid = 0;
+        }
      	$uuid = $this->db->escape($uuid);
      	$table = $this->_getTable($uuid);
      	$sql = "SELECT * FROM $table WHERE userid = $uuid";
      	$query = $this->db->query($sql);
      	if( $query->num_rows() > 0 ){
      		$r = current($query->result_array());
-     		return $r;
+            return $r;
      	}else{
      		return null;
      	}
@@ -270,8 +273,11 @@ class User_model extends CI_Model{
       * @return 表明
       */
      private function _getTable($uuid){
-     	$tableIndex = $uuid % self::userTableCnt;
-     	return "user".sprintf("%02d",$tableIndex);
+         if($uuid < 0){
+             $uuid ==0;
+         }
+     	 $tableIndex = $uuid % self::userTableCnt;
+     	 return "user".sprintf("%02d",$tableIndex);
      }
 
 
