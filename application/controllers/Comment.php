@@ -51,7 +51,7 @@ class Comment extends MY_Controller{
         $answer = $this->input->get_post('answer');
 
         parent::_validateToken();
-
+        parent::_validateComment($c_id);
 
         $this->Comment_model->insertReply($c_id, $answer);
 
