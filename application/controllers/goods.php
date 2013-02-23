@@ -137,6 +137,7 @@ class Goods extends MY_Controller{
     /**
      * 获取商品列表
      * 包括根据地理位置获取和获取某人的商品列表
+     * @deprecated
      */
     function getList(){
 
@@ -183,5 +184,69 @@ class Goods extends MY_Controller{
             }
 
         }
+    }
+
+
+    /**
+     * 根据地理位置获取附近商品信息
+     */
+    function getNearbyList(){
+
+        $userId = $this->input->get_post('uid');
+
+        $count = $this->input->get_post('count');
+        if(empty($count))
+            $count = self::DEFAULT_LIST_COUNT;
+
+        $get_time = $this->input->get_post('get_time');
+        if(empty($get_time))
+            $get_time = time();
+
+        $op = $this->input->get_post('op');
+        if(empty($op))
+            $op = -1;  //默认显示更多
+
+        $keyword = $this->input->get_post('keyword');
+        $lon = $this->input->get_post('lon');
+        $lat = $this->input->get_post('lat');
+
+
+        $nearList = $this->Goods_model->getNearGoodsByLocal($userId,$lon, $lat, $keyword, $get_time, $count, $op);
+
+        if(is_array($nearList)){
+            echo json_encode($nearList);
+        }else{
+            tkProcessError(30005);
+        }
+    }
+
+    /**
+     * 获取某用户的商品列表
+     */
+    function getPublishList(){
+        $userId = $this->input->get_post('uid');
+
+        $count = $this->input->get_post('count');
+        if(empty($count))
+            $count = self::DEFAULT_LIST_COUNT;
+
+        $get_time = $this->input->get_post('get_time');
+        if(empty($get_time))
+            $get_time = time();
+
+        $op = $this->input->get_post('op');
+        if(empty($op))
+            $op = -1;  //默认显示更多
+
+        $status = $this->input->get_post('status');
+
+        $goodList = $this->Goods_model->getAllGoodsByUser($userId, $status, $get_time, $count, $op);
+
+        if(is_array($goodList)){
+            echo json_encode($goodList);
+        }else{
+            tkProcessError(30005);
+        }
+
     }
 }

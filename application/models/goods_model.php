@@ -258,7 +258,7 @@ class Goods_model extends CI_Model{
      * @param $lon
      * @param $lat
      */
-    function getNearGoodsByLocal($lon, $lat, $keyword, $get_time, $count, $op){
+    function getNearGoodsByLocal($userId,$lon, $lat, $keyword, $get_time, $count, $op){
 
         $list = array();
 
@@ -267,6 +267,10 @@ class Goods_model extends CI_Model{
         );
 
         $query['status'] = self::GOODS_STATUS_ONLINE;
+
+        // 不检索自己发布的商品
+        $query['userid'] = array('$not' => $userId);
+
         if($keyword != ""){
             $query["title"] = new MongoRegex("/".$keyword."/i");
         }
