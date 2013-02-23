@@ -144,11 +144,15 @@ class User extends MY_Controller{
 
         parent::_validateUID($uid);
 
+
+        $img_base_path = $this->config->item("img_upload_base_path");
+
 		$profile = $this->User_model->getUserInfo($uid);
 
 		$result = array();
 		if($profile){
-			$result['avatar'] = $profile['icon'];
+			$result['bpic'] = $img_base_path.$profile['avatar_orgin'];
+			$result['spic'] = $img_base_path.$profile['icon'];
 			$result['nickname'] = $profile['nickname'];
 			$result['intro'] = $profile['desc'];
 			$result['sex'] = $profile['gender'];
