@@ -158,6 +158,7 @@ class User extends MY_Controller{
 			$result['sex'] = $profile['gender'];
 			$result['goods_count'] = $this->Goods_model->getAllGoodsCntByUser($uid);
 			$result['online'] = $this->User_model->getOnlineStatus($uid);
+			$result['uid'] = $uid;
 		}
 		echo json_encode($result);
 	}
